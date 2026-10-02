@@ -1,0 +1,181 @@
+---
+// Hero composition: a live reference-style switcher (Ibraheem's own preprint, formatted
+// correctly in four styles), a small code window, and a research status chip.
+import Icon from './Icon.astro';
+
+const doi = 'https://doi.org/10.48550/arXiv.2602.07933';
+const styles = [
+  {
+    name: 'APA',
+    html: `Oseni, O. S., Obanla, I. O., &amp; Jimoh, T. A. (2026). <em>Attention-based deep learning for early Parkinson’s disease detection with tabular biomedical data</em> (arXiv:2602.07933). arXiv. ${doi}`,
+  },
+  {
+    name: 'Harvard',
+    html: `Oseni, O.S., Obanla, I.O. and Jimoh, T.A. (2026) ‘Attention-based deep learning for early Parkinson’s disease detection with tabular biomedical data’, <em>arXiv</em> [Preprint]. Available at: ${doi}.`,
+  },
+  {
+    name: 'MLA',
+    html: `Oseni, Olamide Samuel, et al. “Attention-Based Deep Learning for Early Parkinson’s Disease Detection with Tabular Biomedical Data.” <em>arXiv</em>, 2026, ${doi.replace('https://', '')}.`,
+  },
+  {
+    name: 'Chicago',
+    html: `Oseni, Olamide Samuel, Ibraheem Omotolani Obanla, and Toheeb Aduramomi Jimoh. 2026. “Attention-Based Deep Learning for Early Parkinson’s Disease Detection with Tabular Biomedical Data.” arXiv. ${doi}.`,
+  },
+];
+---
+
+<div class="relative isolate mx-auto w-full max-w-[34rem] lg:max-w-none">
+  <!-- backdrop -->
+  <div aria-hidden="true" class="dot-grid absolute -inset-6 -z-10 rounded-[1.25rem] sm:-inset-8"></div>
+  <div
+    aria-hidden="true"
+    class="absolute top-[8%] right-[-6%] -z-10 size-56 rounded-full bg-primary-soft blur-2xl sm:size-72"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute bottom-[-4%] left-[4%] -z-10 size-40 rounded-full bg-[#f3dfb3] opacity-70 blur-2xl"
+  ></div>
+
+  <!-- code window (desktop and tablet only) -->
+  <div
+    aria-hidden="true"
+    class="enter absolute -top-10 right-[-1.5rem] hidden w-[20.5rem] rotate-[2deg] overflow-hidden rounded-[var(--radius-panel)] bg-ink p-4 font-mono text-[0.72rem] leading-relaxed text-paper/80 shadow-2xl sm:block"
+    style="--d: 450ms"
+  >
+    <div class="mb-3 flex gap-1.5">
+      <span class="size-2.5 rounded-full bg-paper/20"></span><span class="size-2.5 rounded-full bg-paper/20"></span><span
+        class="size-2.5 rounded-full bg-paper/20"></span>
+    </div>
+    <pre class="whitespace-pre"><span class="text-gold">import</span> pandas <span class="text-gold">as</span> pd
+<span class="text-gold">from</span> xgboost <span class="text-gold">import</span> XGBClassifier
+
+model = XGBClassifier(eval_metric=<span class="text-[#9fd6c9]">"auc"</span>)
+model.fit(X_train, y_train)</pre>
+  </div>
+
+  <!-- reference card -->
+  <figure
+    class="enter relative mt-0 rounded-[var(--radius-panel)] border border-line bg-surface p-5 pb-14 shadow-[0_30px_60px_-30px_rgb(21_24_28/0.45)] sm:mt-20 sm:p-6 sm:pb-12"
+    style="--d: 250ms"
+    data-cite
+  >
+    <figcaption class="flex items-center justify-between gap-3">
+      <span class="flex items-center gap-2 text-sm font-semibold">
+        <span class="icon-chip size-8"><Icon name="Quote" class="size-4" /></span>
+        Reference list
+      </span>
+      <span class="text-xs font-medium text-muted">Same source, four styles</span>
+    </figcaption>
+
+    <div role="tablist" aria-label="Referencing style" class="mt-5 flex flex-wrap gap-1.5">
+      {
+        styles.map((s, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`cite-tab-${i}`}
+            aria-controls={`cite-panel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class="cursor-pointer rounded-full border border-line px-3 py-1 text-[0.8125rem] font-semibold text-muted transition-colors hover:border-ink hover:text-ink aria-selected:border-primary aria-selected:bg-primary aria-selected:text-paper"
+          >
+            {s.name}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="mt-4 grid border-l-2 border-gold pl-4">
+      {
+        styles.map((s, i) => (
+          <p
+            role="tabpanel"
+            id={`cite-panel-${i}`}
+            aria-labelledby={`cite-tab-${i}`}
+            data-active={i === 0 ? 'true' : 'false'}
+            aria-hidden={i === 0 ? undefined : 'true'}
+            class="cite-panel text-[0.9375rem] leading-relaxed [grid-area:1/1] [overflow-wrap:anywhere]"
+            set:html={s.html}
+          />
+        ))
+      }
+    </div>
+  </figure>
+
+  <!-- status chip -->
+  <div
+    aria-hidden="true"
+    class="enter absolute -bottom-7 -left-3 sm:-left-8"
+    style="--d: 700ms"
+  >
+    <div class="float-slow flex items-center gap-3 rounded-[var(--radius-panel)] border border-line bg-surface px-4 py-3 shadow-lg">
+      <span class="icon-chip size-9 bg-status-review-bg text-status-review"><Icon name="Languages" class="size-4" /></span>
+      <span class="text-sm leading-tight">
+        <span class="block font-semibold">Yorùbá dataset audit</span>
+        <span class="text-status-review">Under review</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* All four styles share one grid cell, so the card is always as tall as the longest. */
+  .cite-panel[data-active='false'] {
+    visibility: hidden;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cite-panel[data-active='true'] {
+      animation: cite-in 450ms ease both;
+    }
+  }
+  @keyframes cite-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+</style>
+
+<script>
+  // Reference style switcher: auto-advances until the visitor interacts, then stays put.
+  for (const root of document.querySelectorAll<HTMLElement>('[data-cite]')) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    let current = 0;
+    let timer: number | undefined;
+    let interacted = false;
+
+    const select = (i: number, focus = false) => {
+      current = (i + tabs.length) % tabs.length;
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(j === current));
+        t.tabIndex = j === current ? 0 : -1;
+      });
+      panels.forEach((p, j) => {
+        p.dataset.active = String(j === current);
+        p.toggleAttribute('aria-hidden', j !== current);
+      });
+      if (focus) tabs[current].focus();
+    };
+    const stop = () => window.clearInterval(timer);
+    const pick = (i: number, focus = false) => ((interacted = true), stop(), select(i, focus));
+
+    tabs.forEach((t, i) => t.addEventListener('click', () => pick(i)));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') pick(current + 1, true);
+      if (e.key === 'ArrowLeft') pick(current - 1, true);
+    });
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) {
+      const start = () => {
+        stop();
+        if (!interacted) timer = window.setInterval(() => select(current + 1), 3800);
+      };
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('mouseleave', start);
+      start();
+    }
+  }
+</script>

@@ -6,9 +6,13 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => current === href || current.startsWith(href + '/');
 ---
 
-<header class="border-b border-line bg-paper">
+<header
+  data-header
+  class="sticky top-0 z-30 border-b border-line bg-paper/85 backdrop-blur-md transition-shadow data-[scrolled]:shadow-[0_8px_24px_-16px_rgb(21_24_28/0.4)]"
+>
   <div class="container-site flex min-h-16 items-center justify-between gap-6 py-3">
-    <a href="/" class="text-lg font-semibold tracking-tight text-ink no-underline">
+    <a href="/" class="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-ink no-underline">
+      <span aria-hidden="true" class="grid size-8 place-items-center rounded-md bg-ink text-[0.8125rem] font-bold text-paper">IO</span>
       {site.name}
     </a>
 

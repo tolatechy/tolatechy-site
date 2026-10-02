@@ -1,13 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../site';
 
 const channels = [
-  { label: 'Email', href: `mailto:${site.email}`, text: site.email, note: 'Best for quotes and anything with attachments' },
-  { label: 'WhatsApp', href: site.whatsapp, text: 'Message me on WhatsApp', note: 'Quick questions' },
-  { label: 'LinkedIn', href: site.linkedin, text: 'linkedin.com/in/ibraheemobanla', note: 'Professional enquiries' },
-  { label: 'GitHub', href: site.github, text: 'github.com/tolatechy', note: 'Code and projects' },
-];
+  { icon: 'Mail', label: 'Email', href: `mailto:${site.email}`, text: site.email, note: 'Best for quotes and anything with attachments' },
+  { icon: 'MessageCircle', label: 'WhatsApp', href: site.whatsapp, text: 'Message me on WhatsApp', note: 'Quick questions' },
+  { icon: 'Briefcase', label: 'LinkedIn', href: site.linkedin, text: 'View my LinkedIn profile', note: 'Professional enquiries' },
+  { icon: 'FolderGit2', label: 'GitHub', href: site.github, text: 'github.com/tolatechy', note: 'Code and projects' },
+] as const;
 
 const quoteChecklist = [
   'Your university, course and level (undergraduate, Master’s or PhD)',
@@ -22,47 +24,53 @@ const quoteChecklist = [
   title="Contact Ibraheem Obanla | Request a Quote"
   description="Contact Ibraheem Obanla for a quote on dissertation, referencing, editing and data analysis support, research collaboration, or data science work."
 >
-  <section class="container-site grid gap-14 py-16 sm:py-20 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20 lg:py-24">
-    <div>
-      <p class="eyebrow">Contact</p>
-      <h1 class="mt-4 text-display font-semibold">Get in touch</h1>
-      <p class="mt-7 max-w-[34rem] text-lead text-muted">
-        For academic support, research collaboration or data science work. Email is best for quotes.
-      </p>
+  <PageHeader
+    eyebrow="Contact"
+    title="Get in touch"
+    lead="For academic support, research collaboration or data science work. Email is best for quotes."
+  />
 
-      <dl class="mt-12 border-t-2 border-ink">
-        {
-          channels.map((c) => (
-            <div class="grid gap-1 border-b border-line py-5 sm:grid-cols-[8rem_1fr] sm:gap-6">
-              <dt class="font-semibold">{c.label}</dt>
-              <dd>
-                <a class="link break-all font-medium" href={c.href}>{c.text}</a>
-                <p class="text-sm text-muted">{c.note}</p>
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
+  <section class="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-14">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:self-start">
+      {
+        channels.map((c, i) => (
+          <li data-reveal style={`--d: ${i * 80}ms`}>
+            <a href={c.href} class="panel panel-hover group flex h-full flex-col p-6 no-underline">
+              <span class="icon-chip transition-colors group-hover:bg-primary group-hover:text-paper">
+                <Icon name={c.icon} />
+              </span>
+              <span class="mt-5 font-semibold text-ink">{c.label}</span>
+              <span class="mt-1 text-[0.9375rem] font-medium break-all text-primary">{c.text}</span>
+              <span class="mt-auto pt-3 text-sm text-muted">{c.note}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
-    <aside class="self-start rounded-[var(--radius-panel)] bg-sand p-6 sm:p-8 lg:mt-28">
+    <aside
+      data-reveal
+      class="relative isolate self-start overflow-hidden rounded-[var(--radius-panel)] bg-primary-deep p-7 text-paper sm:p-9"
+    >
+      <div aria-hidden="true" class="dot-grid-light absolute inset-0 -z-10"></div>
+      <div aria-hidden="true" class="absolute -right-20 -bottom-20 -z-10 size-64 rounded-full bg-primary opacity-60 blur-3xl"></div>
       <h2 class="text-h3 font-semibold">Requesting a quote for academic work</h2>
-      <p class="mt-2 text-muted">Including these details helps me give you an accurate quote quickly:</p>
-      <ul class="mt-5 space-y-3">
+      <p class="mt-2 text-paper/75">Including these details helps me give you an accurate quote quickly:</p>
+      <ul class="mt-6 space-y-3.5">
         {
           quoteChecklist.map((item) => (
-            <li class="grid grid-cols-[1rem_1fr] gap-3">
-              <span aria-hidden="true" class="mt-[0.6em] h-px w-3 bg-ink" />
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-gold"><Icon name="CircleCheck" class="size-5" /></span>
               <span>{item}</span>
             </li>
           ))
         }
       </ul>
       <a
-        class="btn btn-primary mt-8 w-full sm:w-auto"
+        class="btn mt-8 w-full bg-paper text-ink hover:bg-gold sm:w-auto"
         href={`mailto:${site.email}?subject=${encodeURIComponent('Quote request')}`}
       >
-        Email a quote request
+        <Icon name="Mail" class="size-4" /> Email a quote request
       </a>
     </aside>
   </section>

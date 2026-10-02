@@ -1,0 +1,18 @@
+---
+// Inline Lucide icon (https://lucide.dev, ISC licence). Usage: <Icon name="PenLine" class="size-5" />
+import * as icons from 'lucide-static';
+
+interface Props {
+  name: keyof typeof icons;
+  class?: string;
+  strokeWidth?: number;
+}
+
+const { name, class: className = 'size-5', strokeWidth = 1.75 } = Astro.props;
+const svg = String(icons[name] ?? '')
+  .replace(/\sclass="[^"]*"/, '')
+  .replace('<svg', `<svg class="${className}" aria-hidden="true" focusable="false"`)
+  .replace(/stroke-width="[^"]*"/, `stroke-width="${strokeWidth}"`);
+---
+
+<Fragment set:html={svg} />
