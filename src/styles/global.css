@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Temporary tokens for the holding page. The full design system replaces these in session 2. */
+@theme {
+  --color-paper: #f6f6f3;
+  --color-ink: #1b1f24;
+  --color-muted: #5a6068;
+  --color-accent: #1d4ed8;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
