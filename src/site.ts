@@ -6,7 +6,6 @@ export const site = {
   /** Long-standing tech nickname, shown as a handle next to the name. */
   handle: 'tolatechy',
   role: 'Data Scientist & Research Analyst',
-  location: 'Lagos, Nigeria',
   email: 'info@ibraheemobanla.com',
   whatsapp: 'https://wa.me/2349020660127',
   linkedin: 'https://www.linkedin.com/in/ibraheemobanla',
