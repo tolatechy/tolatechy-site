@@ -21,15 +21,11 @@ export const process = [
   {
     icon: 'CircleCheck',
     title: 'Submit with confidence',
-    text: 'Your work, in your words, meeting the conventions your markers expect.',
+    text: 'Work that meets the conventions your markers expect.',
   },
 ] as const;
 
 export const faqs = [
-  {
-    q: 'Will you write my dissertation or essay for me?',
-    a: 'I offer guidance, editing and feedback, in which the final work is completely your own.',
-  },
   {
     q: 'Which referencing styles do you work with?',
     a: `${referencingStyles.join(', ')}, and others on request. Tell me which one your department uses, or send me your module handbook.`,

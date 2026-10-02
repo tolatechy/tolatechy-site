@@ -4,7 +4,7 @@ seoTitle: "Dissertation Editing & Proofreading for UK University Students"
 description: "Editing and proofreading for dissertations, theses and essays: grammar, UK English, clarity, structure and academic tone, while keeping your argument and your voice."
 short: "Clarity, grammar, structure and academic tone, while keeping your argument and your voice."
 icon: "PenLine"
-audience: "Students who know what they want to say but want it to read as clear, confident academic English, especially those writing at length in a UK style for the first time. Many UK universities have a proofreading policy; I work within it."
+audience: "Students who know what they want to say but want it to read as clear, confident academic English, especially those writing at length in a UK style for the first time."
 includes:
   - "Grammar, spelling and punctuation, in UK English"
   - "Clarity and flow, so each paragraph says one thing well"

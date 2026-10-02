@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CitationCard from '../../components/CitationCard.astro';
 import ProcessSteps from '../../components/ProcessSteps.astro';
-import IntegrityNote from '../../components/IntegrityNote.astro';
 import Icon from '../../components/Icon.astro';
 import { site } from '../../site';
 import { referencingStyles } from '../../data/support';
@@ -89,7 +88,6 @@ const jsonLd = {
   <section class="container-site py-20 sm:py-24" aria-labelledby="process-heading">
     <h2 id="process-heading" data-reveal class="text-center text-h2 font-bold">How it works.</h2>
     <div class="stage mt-12 p-4 sm:p-6"><ProcessSteps /></div>
-    <div class="mt-5"><IntegrityNote /></div>
   </section>
 
   <section class="container-site pb-24 sm:pb-32" aria-labelledby="more-heading">
