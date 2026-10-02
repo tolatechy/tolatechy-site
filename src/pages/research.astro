@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../site';
+
+const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+
+const areaIcon: Record<string, string> = {
+  'Machine learning in health': 'HeartPulse',
+  'Natural language processing': 'Languages',
+  'Language data and policy': 'Database',
+};
+const glow = {
+  preprint: 'bg-status-preprint-bg',
+  'under-review': 'bg-status-review-bg',
+  'in-progress': 'bg-status-progress-bg',
+};
+
+const interests = [
+  { icon: 'Languages', title: 'Low-resource language NLP', text: 'Models that work for African languages, with Yorùbá as a starting point.' },
+  { icon: 'Database', title: 'Language data and governance', text: 'How language datasets are documented, licensed, funded and kept up.' },
+  { icon: 'Gauge', title: 'Performance against cost', text: 'When larger models are worth their computational cost, and when they are not.' },
+  { icon: 'HeartPulse', title: 'Machine learning in health', text: 'Deep learning for clinical screening from tabular biomedical data.' },
+];
+
+const mail = (subject: string) => `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
+
+const preprint = research.find((r) => r.data.status === 'preprint')?.data;
+const jsonLd = preprint && {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: preprint.title,
+  datePublished: '2026-02-08',
+  url: preprint.link,
+  author: [
+    ...preprint.coauthors.slice(0, 1).map((name) => ({ '@type': 'Person', name })),
+    { '@type': 'Person', name: 'Ibraheem Omotolani Obanla' },
+    ...preprint.coauthors.slice(1).map((name) => ({ '@type': 'Person', name })),
+  ],
+};
+---
+
+<Base
+  title="Research: NLP for African Languages & Machine Learning in Health | Ibraheem Obanla"
+  description="Research by Ibraheem Obanla on natural language processing for low-resource African languages, Yorùbá language data, and deep learning for early Parkinson's disease detection."
+  jsonLd={jsonLd}
+>
+  <PageHeader
+    eyebrow="Research"
+    title="Research."
+    lead="Natural language processing for low-resource African languages, and machine learning in health."
+  />
+
+  <section class="container-site" aria-label="Research projects">
+    <ul class="grid gap-5">
+      {
+        research.map(({ data }, i) => (
+          <li data-reveal style={`--d: ${i * 100}ms`} class="stage relative isolate overflow-hidden">
+            <div aria-hidden="true" class:list={['absolute -top-24 -right-24 -z-10 size-80 rounded-full blur-3xl', glow[data.status]]} />
+            <div class="grid gap-8 p-6 sm:p-10 md:grid-cols-[auto_minmax(0,1fr)] md:gap-10">
+              <span class="grid size-20 place-items-center rounded-[1.5rem] bg-white shadow-[0_20px_40px_-20px_rgb(17_17_19/0.45)]">
+                <Icon name={(areaIcon[data.area] ?? 'FlaskConical') as any} class="size-9" strokeWidth={1.5} />
+              </span>
+              <div>
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <StatusBadge status={data.status} />
+                  <span class="text-sm text-muted">{data.area} · {data.year}</span>
+                </div>
+                <h2 class="mt-4 max-w-[40rem] text-[clamp(1.5rem,1.2rem+1.2vw,2.125rem)] leading-tight font-bold tracking-[-0.03em]">{data.title}</h2>
+                <p class="mt-3 max-w-[42rem] text-lead text-muted">{data.highlight}</p>
+                <p class="mt-4 text-sm text-muted">
+                  {data.venue}
+                  {data.coauthors.length > 0 && <> · with {data.coauthors.join(' and ')}</>}
+                </p>
+                <div class="mt-6 flex flex-wrap gap-2">
+                  {data.link && (
+                    <a href={data.link} class="btn btn-primary btn-sm">
+                      Read on {data.venue} <Icon name="ArrowUpRight" class="size-4" />
+                    </a>
+                  )}
+                  <a href={mail(`About your research: ${data.title}`)} class:list={['btn btn-sm', data.link ? 'btn-secondary' : 'btn-primary']}>
+                    Let's talk
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="container-site py-20 sm:py-28" aria-labelledby="interests-heading">
+    <h2 id="interests-heading" data-reveal class="text-center text-h2 font-bold">What I'm interested in.</h2>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        interests.map((t, i) => (
+          <li data-reveal style={`--d: ${i * 80}ms`} class="panel p-6">
+            <span class="icon-chip"><Icon name={t.icon as any} /></span>
+            <h3 class="mt-5 font-semibold">{t.title}</h3>
+            <p class="mt-1.5 text-[0.9375rem] text-muted">{t.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="container-site pb-24 sm:pb-32">
+    <div data-reveal class="rounded-[var(--radius-stage)] bg-ink px-6 py-14 text-center text-paper sm:px-12 sm:py-20">
+      <h2 class="mx-auto max-w-[18ch] text-h2 font-bold">Working on something related?</h2>
+      <p class="mx-auto mt-4 max-w-[32rem] text-paper/70">I'm open to collaboration on African-language NLP, language data and applied machine learning.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2.5">
+        <a href={mail('Research collaboration')} class="btn bg-paper text-ink hover:bg-stage">Let's talk</a>
+        <a href={site.linkedin} class="btn border border-paper/25 text-paper hover:border-paper">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</Base>

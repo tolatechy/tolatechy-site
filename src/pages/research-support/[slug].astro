@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CitationCard from '../../components/CitationCard.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import IntegrityNote from '../../components/IntegrityNote.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../site';
+import { referencingStyles } from '../../data/support';
+
+export async function getStaticPaths() {
+  const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+  return services.map((s) => ({ params: { slug: s.id }, props: { service: s, all: services } }));
+}
+
+const { service, all } = Astro.props;
+const { data, id } = service;
+const others = all.filter((s) => s.id !== id);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: data.title,
+  description: data.description,
+  serviceType: 'Academic support',
+  areaServed: 'United Kingdom',
+  audience: { '@type': 'EducationalAudience', educationalRole: 'student' },
+  provider: { '@type': 'Person', name: site.name, url: Astro.site?.href },
+};
+---
+
+<Base title={`${data.seoTitle} | ${site.name}`} description={data.description} jsonLd={jsonLd}>
+  <section class="container-site pt-10 pb-12 text-center sm:pt-14 sm:pb-16">
+    <nav aria-label="Breadcrumb" class="enter text-sm text-muted">
+      <a href="/research-support" class="link">Writing support</a>
+      <span class="mx-1.5">/</span>
+      <span class="text-ink">{data.title}</span>
+    </nav>
+    <span class="enter mx-auto mt-8 grid size-16 place-items-center rounded-[1.25rem] bg-stage" style="--d: 40ms">
+      <Icon name={data.icon as any} class="size-7" strokeWidth={1.5} />
+    </span>
+    <h1 class="enter mx-auto mt-6 max-w-[18ch] text-display font-bold" style="--d: 80ms">{data.title}.</h1>
+    <p class="enter mx-auto mt-6 max-w-[36rem] text-lead text-muted" style="--d: 160ms">{data.short}</p>
+    <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
+      <a href={site.quote} class="btn btn-primary">Request a quote</a>
+      <a href={site.whatsapp} class="btn btn-secondary"><Icon name="MessageCircle" class="size-4" /> WhatsApp</a>
+    </div>
+  </section>
+
+  <section class="container-site">
+    <div class="stage relative isolate overflow-hidden px-5 py-10 sm:px-12 sm:py-14">
+      <div aria-hidden="true" class="absolute -top-40 -right-24 -z-10 size-[28rem] rounded-full bg-primary-soft blur-3xl"></div>
+      <div class="mx-auto grid max-w-[60rem] gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+        <div data-reveal class="rounded-2xl bg-white p-7">
+          <h2 class="text-h3 font-semibold">What's included</h2>
+          <ul class="mt-5 space-y-3.5">
+            {
+              data.includes.map((item) => (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 shrink-0 text-primary"><Icon name="CircleCheck" class="size-5" /></span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="flex flex-col gap-5">
+          <div data-reveal style="--d: 100ms" class="rounded-2xl bg-white p-7">
+            <h2 class="text-h3 font-semibold">Who it's for</h2>
+            <p class="mt-3 text-muted">{data.audience}</p>
+          </div>
+          {
+            id === 'referencing' ? (
+              <div data-reveal style="--d: 180ms"><CitationCard /></div>
+            ) : (
+              <div data-reveal style="--d: 180ms" class="rounded-2xl bg-white p-7">
+                <h2 class="text-h3 font-semibold">Referencing styles</h2>
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {referencingStyles.map((s) => <li class="rounded-full bg-stage px-3 py-1 text-sm font-medium">{s}</li>)}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-site py-20 sm:py-24" aria-labelledby="process-heading">
+    <h2 id="process-heading" data-reveal class="text-center text-h2 font-bold">How it works.</h2>
+    <div class="stage mt-12 p-4 sm:p-6"><ProcessSteps /></div>
+    <div class="mt-5"><IntegrityNote /></div>
+  </section>
+
+  <section class="container-site pb-24 sm:pb-32" aria-labelledby="more-heading">
+    <h2 id="more-heading" data-reveal class="text-center text-h2 font-bold">Other ways I can help.</h2>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        others.map((s, i) => (
+          <li data-reveal style={`--d: ${i * 80}ms`}>
+            <a href={`/research-support/${s.id}`} class="panel panel-hover group flex h-full flex-col p-6 no-underline">
+              <span class="icon-chip transition-colors group-hover:bg-ink group-hover:text-paper"><Icon name={s.data.icon as any} /></span>
+              <h3 class="mt-5 font-semibold text-ink">{s.data.title}</h3>
+              <p class="mt-1.5 text-sm text-muted">{s.data.short}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div data-reveal class="mt-12 flex flex-wrap justify-center gap-2.5">
+      <a href={site.quote} class="btn btn-primary">Request a quote</a>
+      <a href="/research-support" class="btn btn-secondary">All support</a>
+    </div>
+  </section>
+</Base>

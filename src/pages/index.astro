@@ -8,10 +8,13 @@ import CitationCard from '../components/CitationCard.astro';
 import ToolLogo from '../components/ToolLogo.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../site';
-import { featuredProjects } from '../data/featured-projects';
 import heroPhoto from '../assets/hero/analytics-screen.jpg';
 
 const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+const featuredProjects = (await getCollection('projects'))
+  .filter((p) => p.data.featured && p.data.image)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({ ...p.data, image: p.data.image!, imageAlt: `Chart from the ${p.data.title} notebook` }));
 
 const tools = [
   'siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 'siPandas', 'siNumpy',
@@ -195,7 +198,7 @@ const jsonLd = {
                 <div>
                   <p class="text-sm text-muted">{p.area}</p>
                   <h3 class="mt-1 text-h3 font-semibold text-ink">{p.title}</h3>
-                  <p class="mt-1.5 text-muted">{p.summary}</p>
+                  <p class="mt-1.5 line-clamp-2 text-muted">{p.summary}</p>
                 </div>
                 <span class="mt-1 grid size-10 shrink-0 place-items-center rounded-full bg-stage text-ink transition-colors group-hover:bg-ink group-hover:text-paper">
                   <Icon name="ArrowUpRight" class="size-4" />
@@ -209,7 +212,7 @@ const jsonLd = {
 
     <div data-reveal class="mt-14 flex flex-wrap justify-center gap-2.5">
       <a href={site.hire} class="btn btn-primary">Hire me</a>
-      <a href={site.github} class="btn btn-secondary">All projects on GitHub <Icon name="ArrowUpRight" class="size-4" /></a>
+      <a href="/projects" class="btn btn-secondary">See all projects <Icon name="ArrowRight" class="size-4" /></a>
     </div>
   </section>
 
@@ -256,7 +259,7 @@ const jsonLd = {
       </ul>
 
       <div data-reveal class="mt-14 flex justify-center">
-        <a href="/contact" class="btn btn-secondary">Let's talk about research</a>
+        <a href="/research" class="btn btn-secondary">More about my research <Icon name="ArrowRight" class="size-4" /></a>
       </div>
     </div>
   </section>
@@ -293,7 +296,7 @@ const jsonLd = {
 
       <div data-reveal class="mt-12 flex flex-wrap justify-center gap-2.5">
         <a href={site.quote} class="btn btn-primary">Request a quote</a>
-        <a href={site.whatsapp} class="btn btn-secondary"><Icon name="MessageCircle" class="size-4" /> WhatsApp</a>
+        <a href="/research-support" class="btn btn-secondary">See all services <Icon name="ArrowRight" class="size-4" /></a>
       </div>
     </div>
   </section>

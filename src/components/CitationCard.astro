@@ -5,6 +5,8 @@ interface Props {
   class?: string;
 }
 const { class: className } = Astro.props;
+// Unique prefix so several cards on one page don't share element ids.
+const uid = `cite-${Math.random().toString(36).slice(2, 8)}`;
 
 const doi = 'https://doi.org/10.48550/arXiv.2602.07933';
 const styles = [
@@ -39,8 +41,8 @@ const styles = [
           <button
             type="button"
             role="tab"
-            id={`cite-tab-${i}`}
-            aria-controls={`cite-panel-${i}`}
+            id={`${uid}-tab-${i}`}
+            aria-controls={`${uid}-panel-${i}`}
             aria-selected={i === 0 ? 'true' : 'false'}
             tabindex={i === 0 ? 0 : -1}
             class="cursor-pointer rounded-full bg-stage px-3 py-1 text-[0.8125rem] font-medium text-muted transition-colors hover:text-ink aria-selected:bg-ink aria-selected:text-paper"
@@ -55,8 +57,8 @@ const styles = [
         styles.map((s, i) => (
           <p
             role="tabpanel"
-            id={`cite-panel-${i}`}
-            aria-labelledby={`cite-tab-${i}`}
+            id={`${uid}-panel-${i}`}
+            aria-labelledby={`${uid}-tab-${i}`}
             data-active={i === 0 ? 'true' : 'false'}
             aria-hidden={i === 0 ? undefined : 'true'}
             class="cite-panel pl-[1.5em] -indent-[1.5em] text-[0.875rem] leading-relaxed [grid-area:1/1] [overflow-wrap:anywhere]"

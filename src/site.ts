@@ -17,10 +17,10 @@ export const site = {
 
 // Main navigation. Set `ready: true` when a page is built, and it appears in the menu.
 export const nav = [
-  { label: 'Projects', href: '/projects', ready: false },
-  { label: 'Research', href: '/research', ready: false },
-  { label: 'Writing Support', href: '/research-support', ready: false },
-  { label: 'Resume', href: '/resume', ready: false },
+  { label: 'Projects', href: '/projects', ready: true },
+  { label: 'Research', href: '/research', ready: true },
+  { label: 'Writing Support', href: '/research-support', ready: true },
+  { label: 'Resume', href: '/resume', ready: true },
   { label: 'About', href: '/about', ready: true },
   { label: 'Contact', href: '/contact', ready: true },
 ];

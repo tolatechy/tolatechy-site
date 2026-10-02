@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../site';
+import { summary, skills, experience, sampleProjects, publication, education } from '../data/resume';
+---
+
+<Base
+  title="Resume | Ibraheem Obanla, Data Scientist & Machine Learning Engineer"
+  description="Resume of Ibraheem Obanla: data scientist and machine learning engineer with five years of experience in credit risk, customer retention and security analytics. Download as PDF or Word."
+>
+  <PageHeader eyebrow="Resume" title="Resume." lead="Read it here, or download it as a PDF or Word document.">
+    <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
+      <a href={site.resumePdf} class="btn btn-primary"><Icon name="Download" class="size-4" /> Download PDF</a>
+      <a href={site.resumeDocx} class="btn btn-secondary"><Icon name="Download" class="size-4" /> Download Word</a>
+    </div>
+  </PageHeader>
+
+  <div class="container-site pb-24 sm:pb-32">
+    <div class="stage p-2 sm:p-5 lg:p-8">
+      <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_17rem]">
+        <!-- Document -->
+        <article class="rounded-[1.25rem] bg-white px-5 py-8 sm:px-10 sm:py-12 lg:px-14">
+          <header class="border-b border-line pb-8">
+            <h2 class="text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">{site.name}</h2>
+            <p class="mt-1 text-muted">Data Scientist &amp; Machine Learning Engineer · {site.location}</p>
+            <p class="mt-5 max-w-[46rem] text-ink/85">{summary}</p>
+          </header>
+
+          <section class="border-b border-line py-8" aria-labelledby="exp">
+            <h3 id="exp" class="eyebrow">Professional experience</h3>
+            <div class="mt-6 space-y-9">
+              {
+                experience.map((e) => (
+                  <div>
+                    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <p class="text-lg font-semibold">{e.role}</p>
+                      <p class="text-sm text-muted tabular-nums">{e.dates}</p>
+                    </div>
+                    <p class="text-muted">{e.org} · {e.place}</p>
+                    <ul class="mt-4 space-y-2.5">
+                      {e.points.map((p) => (
+                        <li class="flex gap-3 text-[0.9375rem] text-ink/85">
+                          <span aria-hidden="true" class="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-ink/40" />
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="border-b border-line py-8" aria-labelledby="skills">
+            <h3 id="skills" class="eyebrow">Technical skills</h3>
+            <dl class="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-[10rem_1fr]">
+              {
+                skills.map((s) => (
+                  <>
+                    <dt class="font-semibold">{s.group}</dt>
+                    <dd class="-mt-2 text-[0.9375rem] text-ink/85 sm:mt-0">{s.items}</dd>
+                  </>
+                ))
+              }
+            </dl>
+          </section>
+
+          <section class="border-b border-line py-8" aria-labelledby="proj">
+            <h3 id="proj" class="eyebrow">Sample projects</h3>
+            <div class="mt-6 space-y-7">
+              {
+                sampleProjects.map((p) => (
+                  <div>
+                    <a href={p.repo} class="link font-semibold">{p.title}</a>
+                    <ul class="mt-3 space-y-2">
+                      {p.points.map((pt) => (
+                        <li class="flex gap-3 text-[0.9375rem] text-ink/85">
+                          <span aria-hidden="true" class="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-ink/40" />
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+            <p class="mt-6 text-[0.9375rem]">
+              Full portfolio: <a href="/projects" class="link">all projects</a> · <a href={site.github} class="link">github.com/tolatechy</a>
+            </p>
+          </section>
+
+          <section class="border-b border-line py-8" aria-labelledby="pub">
+            <h3 id="pub" class="eyebrow">Publication</h3>
+            <p class="mt-4 font-semibold">{publication.title}</p>
+            <a href={publication.url} class="link mt-1 inline-block text-[0.9375rem]">arxiv.org/abs/2602.07933</a>
+          </section>
+
+          <section class="pt-8" aria-labelledby="edu">
+            <h3 id="edu" class="eyebrow">Education</h3>
+            <div class="mt-5 space-y-5">
+              {
+                education.map((e) => (
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <div>
+                      <p class="font-semibold">{e.degree}</p>
+                      <p class="text-[0.9375rem] text-muted">{e.school}</p>
+                    </div>
+                    <p class="text-sm text-muted tabular-nums">{e.year}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="space-y-4 lg:sticky lg:top-28 lg:self-start">
+          <div class="rounded-[1.25rem] bg-white p-6">
+            <p class="font-semibold">Download</p>
+            <div class="mt-4 grid gap-2">
+              <a class="btn btn-primary justify-between" href={site.resumePdf}>PDF <Icon name="Download" class="size-4" /></a>
+              <a class="btn btn-secondary justify-between" href={site.resumeDocx}>Word <Icon name="Download" class="size-4" /></a>
+            </div>
+          </div>
+          <div class="rounded-[1.25rem] bg-ink p-6 text-paper">
+            <p class="text-lg font-semibold tracking-tight">Like what you see?</p>
+            <p class="mt-1 text-sm text-paper/65">Available for remote data science work.</p>
+            <a href={site.hire} class="btn btn-sm mt-5 bg-paper text-ink hover:bg-stage">Hire me</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</Base>

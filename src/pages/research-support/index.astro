@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CitationCard from '../../components/CitationCard.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import IntegrityNote from '../../components/IntegrityNote.astro';
+import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../site';
+import { faqs, referencingStyles } from '../../data/support';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Dissertation, Referencing & Proofreading Support for UK Students | Ibraheem Obanla"
+  description="Research and writing support for students at UK universities: referencing (Harvard, APA, OSCOLA and more), editing and proofreading, dissertation planning, literature reviews and statistics. Request a quote."
+>
+  <PageHeader
+    eyebrow="Research & writing support"
+    title="Academic support for students at UK universities."
+    lead="Guidance, editing and feedback for undergraduate, Master's and PhD students, especially those meeting UK academic conventions for the first time."
+  >
+    <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
+      <a href={site.quote} class="btn btn-primary">Request a quote</a>
+      <a href={site.whatsapp} class="btn btn-secondary"><Icon name="MessageCircle" class="size-4" /> WhatsApp</a>
+    </div>
+  </PageHeader>
+
+  <!-- Showcase -->
+  <section class="container-site">
+    <div class="stage relative isolate overflow-hidden px-5 py-10 sm:px-12 sm:py-14">
+      <div aria-hidden="true" class="absolute -top-40 -left-24 -z-10 size-[28rem] rounded-full bg-primary-soft blur-3xl"></div>
+      <div aria-hidden="true" class="absolute -right-24 -bottom-40 -z-10 size-[26rem] rounded-full bg-[#fbefd5] blur-3xl"></div>
+      <div class="mx-auto grid max-w-[60rem] items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+        <div data-reveal><CitationCard /></div>
+        <div data-reveal style="--d: 120ms" class="text-center lg:text-left">
+          <p class="text-h3 font-semibold">One source, every style.</p>
+          <p class="mt-2 text-muted">Referencing in the style your department uses, applied the same way from the first page to the last.</p>
+          <ul class="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
+            {referencingStyles.map((s) => <li class="rounded-full bg-white px-3 py-1 text-sm font-medium">{s}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="container-site py-20 sm:py-28" aria-labelledby="services-heading">
+    <h2 id="services-heading" data-reveal class="text-center text-h2 font-bold">How I can help.</h2>
+    <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map(({ id, data }, i) => (
+          <li data-reveal style={`--d: ${(i % 3) * 90}ms`} class:list={[i === 0 && 'lg:col-span-2']}>
+            <a href={`/research-support/${id}`} class="panel panel-hover group flex h-full flex-col p-7 no-underline">
+              <span class="icon-chip transition-colors group-hover:bg-ink group-hover:text-paper"><Icon name={data.icon as any} /></span>
+              <h3 class="mt-6 text-h3 font-semibold text-ink">{data.title}</h3>
+              <p class="mt-2 text-muted">{data.short}</p>
+              <p class="mt-auto flex items-center gap-1 pt-6 text-[0.9375rem] font-medium text-ink">
+                Learn more <Icon name="ArrowRight" class="size-4 transition-transform group-hover:translate-x-0.5" />
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- How it works -->
+  <section class="container-site" aria-labelledby="process-heading">
+    <div class="stage px-5 py-14 sm:px-12 sm:py-20">
+      <h2 id="process-heading" data-reveal class="text-center text-h2 font-bold">How it works.</h2>
+      <div class="mt-12"><ProcessSteps /></div>
+    </div>
+  </section>
+
+  <section class="container-site pt-5"><IntegrityNote /></section>
+
+  <!-- FAQ -->
+  <section class="container-site grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16" aria-labelledby="faq-heading">
+    <div data-reveal>
+      <h2 id="faq-heading" class="text-h2 font-bold">Questions.</h2>
+      <p class="mt-4 text-muted">Anything else? Ask me on WhatsApp or by email.</p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href={site.quote} class="btn btn-primary">Request a quote</a>
+      </div>
+    </div>
+    <Faq items={faqs} />
+  </section>
+</Base>

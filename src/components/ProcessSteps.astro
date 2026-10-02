@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { process } from '../data/support';
+---
+
+<ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  {
+    process.map((s, i) => (
+      <li data-reveal style={`--d: ${i * 90}ms`} class="relative rounded-2xl bg-white p-6">
+        <div class="flex items-center justify-between">
+          <span class="icon-chip"><Icon name={s.icon} /></span>
+          <span class="text-sm font-medium text-muted tabular-nums">0{i + 1}</span>
+        </div>
+        <h3 class="mt-6 font-semibold">{s.title}</h3>
+        <p class="mt-1.5 text-[0.9375rem] text-muted">{s.text}</p>
+      </li>
+    ))
+  }
+</ol>
