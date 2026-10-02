@@ -28,7 +28,7 @@ export const process = [
 export const faqs = [
   {
     q: 'Will you write my dissertation or essay for me?',
-    a: 'No. I offer guidance, editing and feedback. The ideas, arguments and writing you submit must be your own, which is what your university requires and what protects you.',
+    a: 'I offer guidance, editing and feedback, in which the final work is completely your own.',
   },
   {
     q: 'Which referencing styles do you work with?',
