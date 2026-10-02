@@ -1,10 +1,10 @@
 ---
 title: "Referencing and citation"
-seoTitle: "Harvard, APA & OSCOLA Referencing Help for UK University Students"
-description: "Referencing help for students at UK universities: Harvard, APA, Chicago, MLA, OSCOLA, IEEE, Vancouver and MHRA, applied correctly and consistently across your dissertation or essay."
-short: "Getting your citations and reference list right in whatever style your department uses, and keeping it consistent all the way through."
+seoTitle: "Harvard, APA, MLA & OSCOLA Referencing Help for University Students"
+description: "Referencing help for university students in the UK, US, Canada and worldwide: Harvard, APA, Chicago, MLA, OSCOLA, IEEE, Vancouver and MHRA, applied correctly and consistently across your dissertation or essay."
+short: "Citations and reference lists in the style your department asks for, applied consistently from the first page to the last."
 icon: "Quote"
-audience: "Anyone whose department uses a referencing style they haven't used before. It happens a lot to students who did their first degree in Nigeria and are now on a UK course."
+audience: "Students whose department uses a referencing style they haven't used before. This is common for international students, including many Nigerians studying in the UK, US or Canada."
 includes:
   - "Checking every in-text citation against your reference list, and the other way round"
   - "Formatting references in Harvard, APA, Chicago, MLA, OSCOLA, IEEE, Vancouver, MHRA and other styles"

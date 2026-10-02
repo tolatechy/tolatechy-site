@@ -1,6 +1,6 @@
 ---
 title: Auditing Yorùbá language datasets
-highlight: "I went through the publicly available Yorùbá datasets to see how they're licensed, documented and funded, and what that should mean for language-data policy and funding in Nigeria."
+highlight: How publicly available Yorùbá language datasets are licensed, documented and funded, and what that means for language-data policy and research funding in Nigeria.
 status: under-review
 area: Language data and policy
 year: 2026

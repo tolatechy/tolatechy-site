@@ -1,10 +1,10 @@
 ---
 title: "Dissertation and thesis planning"
 seoTitle: "Dissertation Planning Help: Research Questions, Structure & Timeline"
-description: "Help planning a dissertation or thesis at a UK university: research questions, aims and objectives, chapter structure, methodology and a realistic timeline."
-short: "Sorting out your research questions, chapters and timeline early, so you're not untangling them a week before the deadline."
+description: "Help planning a dissertation or thesis for university students in the UK, US, Canada and worldwide: research questions, aims and objectives, chapter structure, methodology and a realistic timeline."
+short: "Shaping research questions, chapter structure and a realistic timeline so the whole project holds together."
 icon: "Map"
-audience: "Students at the start of a dissertation or thesis, or halfway through and not sure the pieces fit together any more."
+audience: "Undergraduate, Master's and PhD students at the start of a dissertation or thesis, or partway through and unsure whether the pieces fit together."
 includes:
   - "Turning a broad topic into focused research questions, aims and objectives"
   - "A chapter-by-chapter structure that fits your department's expectations"

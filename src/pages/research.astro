@@ -20,10 +20,10 @@ const glow = {
 };
 
 const interests = [
-  { icon: 'Languages', title: 'Low-resource language NLP', text: 'Building models that actually work for African languages, starting with Yorùbá.' },
+  { icon: 'Languages', title: 'Low-resource language NLP', text: 'Models that work for African languages, with Yorùbá as a starting point.' },
   { icon: 'Database', title: 'Language data and governance', text: 'How language datasets are documented, licensed, funded and kept up.' },
-  { icon: 'Gauge', title: 'Performance against cost', text: 'Bigger models cost more to run. I want to know when that cost is actually worth paying.' },
-  { icon: 'HeartPulse', title: 'Machine learning in health', text: 'Using deep learning to catch disease earlier from biomedical data.' },
+  { icon: 'Gauge', title: 'Performance against cost', text: 'When larger models are worth their computational cost, and when they are not.' },
+  { icon: 'HeartPulse', title: 'Machine learning in health', text: 'Deep learning for clinical screening from tabular biomedical data.' },
 ];
 
 const mail = (subject: string) => `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
@@ -51,7 +51,7 @@ const jsonLd = preprint && {
   <PageHeader
     eyebrow="Research"
     title="Research."
-    lead="Most of my research is on NLP for African languages, which are still poorly served by the AI tools most people use. I've also worked on machine learning for early disease detection."
+    lead="Natural language processing for low-resource African languages, and machine learning in health."
   />
 
   <section class="container-site" aria-label="Research projects">
@@ -111,7 +111,7 @@ const jsonLd = preprint && {
   <section class="container-site pb-24 sm:pb-32">
     <div data-reveal class="rounded-[var(--radius-stage)] bg-ink px-6 py-14 text-center text-paper sm:px-12 sm:py-20">
       <h2 class="mx-auto max-w-[18ch] text-h2 font-bold">Working on something related?</h2>
-      <p class="mx-auto mt-4 max-w-[32rem] text-paper/70">If you're working on African-language NLP, language data or applied machine learning, I'd like to hear about it.</p>
+      <p class="mx-auto mt-4 max-w-[32rem] text-paper/70">I'm open to collaboration on African-language NLP, language data and applied machine learning.</p>
       <div class="mt-8 flex flex-wrap justify-center gap-2.5">
         <a href={mail('Research collaboration')} class="btn bg-paper text-ink hover:bg-stage">Let's talk</a>
         <a href={site.linkedin} class="btn border border-paper/25 text-paper hover:border-paper">LinkedIn</a>

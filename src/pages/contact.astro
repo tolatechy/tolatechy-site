@@ -34,14 +34,14 @@ const mail = (subject: string) => `mailto:${site.email}?subject=${encodeURICompo
   <PageHeader
     eyebrow="Contact"
     title="Let's talk."
-    lead="Need a data scientist, or help with your dissertation? Either way, this is where to start."
+    lead="Hire me for data science work, or request a quote for academic support."
   />
 
   <section class="container-site grid gap-5 lg:grid-cols-2">
     <article id="hire" data-reveal class="scroll-mt-28 rounded-[var(--radius-stage)] bg-ink p-7 text-paper sm:p-10">
       <span class="grid size-12 place-items-center rounded-2xl bg-paper/10"><Icon name="BrainCircuit" class="size-6" /></span>
       <h2 class="mt-8 text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">Hire me</h2>
-      <p class="mt-2 text-paper/65">For data science and machine learning roles or projects. It helps if you mention:</p>
+      <p class="mt-2 text-paper/65">Data science, machine learning and analytics work.</p>
       <ul class="mt-7 space-y-3">
         {
           hireChecklist.map((item) => (
@@ -63,7 +63,7 @@ const mail = (subject: string) => `mailto:${site.email}?subject=${encodeURICompo
     <article id="quote" data-reveal style="--d: 120ms" class="stage scroll-mt-28 p-7 sm:p-10">
       <span class="grid size-12 place-items-center rounded-2xl bg-white"><Icon name="GraduationCap" class="size-6" /></span>
       <h2 class="mt-8 text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">Request a quote</h2>
-      <p class="mt-2 text-muted">For help with a dissertation, thesis or essay. It helps if you mention:</p>
+      <p class="mt-2 text-muted">Academic research and writing support.</p>
       <ul class="mt-7 space-y-3">
         {
           quoteChecklist.map((item) => (

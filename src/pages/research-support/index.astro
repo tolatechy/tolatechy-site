@@ -13,13 +13,13 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 ---
 
 <Base
-  title="Dissertation, Referencing & Proofreading Support for UK Students | Ibraheem Obanla"
-  description="Research and writing support for students at UK universities: referencing (Harvard, APA, OSCOLA and more), editing and proofreading, dissertation planning, literature reviews and statistics. Request a quote."
+  title="Dissertation, Referencing & Proofreading Support for Students in the UK, US & Canada | Ibraheem Obanla"
+  description="Research and writing support for university students in the UK, US, Canada and worldwide: referencing (Harvard, APA, MLA, OSCOLA and more), editing and proofreading, dissertation planning, literature reviews and statistics. Request a quote."
 >
   <PageHeader
     eyebrow="Research & writing support"
-    title="Academic support for students at UK universities."
-    lead="I help undergraduate, Master's and PhD students with referencing, editing, planning and analysis. Many of them are new to how UK universities do things."
+    title="Academic support for university students worldwide."
+    lead="Guidance, editing and feedback for undergraduate, Master's and PhD students in the UK, US, Canada and beyond, especially those new to their university's academic conventions."
   >
     <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
       <a href={site.quote} class="btn btn-primary">Request a quote</a>
@@ -35,8 +35,8 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
       <div class="mx-auto grid max-w-[60rem] items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <div data-reveal><CitationCard /></div>
         <div data-reveal style="--d: 120ms" class="text-center lg:text-left">
-          <p class="text-h3 font-semibold">Same paper, four styles.</p>
-          <p class="mt-2 text-muted">Tap through them on the card. Whichever style your department uses, I make sure it's applied the same way all the way through.</p>
+          <p class="text-h3 font-semibold">One source, every style.</p>
+          <p class="mt-2 text-muted">Referencing in the style your department uses, applied the same way from the first page to the last.</p>
           <ul class="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
             {referencingStyles.map((s) => <li class="rounded-full bg-white px-3 py-1 text-sm font-medium">{s}</li>)}
           </ul>
@@ -47,7 +47,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 
   <!-- Services -->
   <section class="container-site py-20 sm:py-28" aria-labelledby="services-heading">
-    <h2 id="services-heading" data-reveal class="text-center text-h2 font-bold">What I help with.</h2>
+    <h2 id="services-heading" data-reveal class="text-center text-h2 font-bold">How I can help.</h2>
     <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {
         services.map(({ id, data }, i) => (
@@ -77,8 +77,8 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
   <!-- FAQ -->
   <section class="container-site grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16" aria-labelledby="faq-heading">
     <div data-reveal>
-      <h2 id="faq-heading" class="text-h2 font-bold">Common questions.</h2>
-      <p class="mt-4 text-muted">Can't see your question here? Just ask on WhatsApp or by email.</p>
+      <h2 id="faq-heading" class="text-h2 font-bold">Questions.</h2>
+      <p class="mt-4 text-muted">Anything else? Ask me on WhatsApp or by email.</p>
       <div class="mt-6 flex flex-wrap gap-2">
         <a href={site.quote} class="btn btn-primary">Request a quote</a>
       </div>

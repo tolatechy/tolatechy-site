@@ -1,6 +1,6 @@
-# tolatechy.com
+# ibraheemobanla.com
 
-Source for [tolatechy.com](https://tolatechy.com), the personal site of Ibraheem Obanla,
+Source for [ibraheemobanla.com](https://ibraheemobanla.com), the personal site of Ibraheem Obanla,
 Data Scientist & Research Writer.
 
 Built with [Astro](https://astro.build) and Tailwind CSS, hosted on Cloudflare Pages.
