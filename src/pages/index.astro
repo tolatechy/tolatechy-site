@@ -49,6 +49,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
+  alternateName: ['TolaTechy', `@${site.handle}`],
   jobTitle: site.role,
   email: `mailto:${site.email}`,
   url: Astro.site?.href,

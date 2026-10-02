@@ -3,6 +3,8 @@
 
 export const site = {
   name: 'Ibraheem Obanla',
+  /** Long-standing tech nickname, shown as a handle next to the name. */
+  handle: 'tolatechy',
   role: 'Data Scientist & Research Writer',
   location: 'Lagos, Nigeria',
   email: 'ibraheemobanla44@gmail.com',

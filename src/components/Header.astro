@@ -15,9 +15,10 @@ const isCurrent = (href: string) => current === href || current.startsWith(href 
     <a href="/" class="flex items-center gap-2 font-semibold tracking-tight text-ink no-underline">
       <span aria-hidden="true" class="grid size-7 place-items-center rounded-full bg-ink text-[0.6875rem] font-bold text-paper">IO</span>
       <span>{site.name}</span>
+      <span class="hidden text-sm font-normal text-muted sm:inline lg:hidden xl:inline">@{site.handle}</span>
     </a>
 
-    <nav aria-label="Main" class="hidden items-center gap-1 md:flex">
+    <nav aria-label="Main" class="hidden items-center gap-1 lg:flex">
       {
         items.map((item) => (
           <a
@@ -33,7 +34,7 @@ const isCurrent = (href: string) => current === href || current.startsWith(href 
     </nav>
 
     <!-- Phone navigation: native disclosure, no JavaScript needed -->
-    <div class="flex items-center gap-1.5 md:hidden">
+    <div class="flex items-center gap-1.5 lg:hidden">
       <a href={site.hire} class="btn btn-primary btn-sm">Hire me</a>
       <details class="group">
         <summary
