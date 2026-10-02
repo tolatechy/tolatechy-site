@@ -1,0 +1,27 @@
+---
+// Research status label. Colours are defined as status-* tokens in global.css.
+export type Status = 'preprint' | 'under-review' | 'in-progress';
+
+interface Props {
+  status: Status;
+}
+
+const labels: Record<Status, string> = {
+  preprint: 'Preprint',
+  'under-review': 'Under review',
+  'in-progress': 'In progress',
+};
+
+const styles: Record<Status, string> = {
+  preprint: 'bg-status-preprint-bg text-status-preprint',
+  'under-review': 'bg-status-review-bg text-status-review',
+  'in-progress': 'bg-status-progress-bg text-status-progress',
+};
+
+const { status } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-1.5 rounded-sm px-2 py-0.5 text-sm font-semibold', styles[status]]}>
+  <span aria-hidden="true" class="size-1.5 rounded-full bg-current"></span>
+  {labels[status]}
+</span>

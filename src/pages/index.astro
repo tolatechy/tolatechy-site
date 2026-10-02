@@ -1,57 +1,289 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import { site } from '../site';
+import { featuredProjects } from '../data/featured-projects';
 
-const links = [
-  { label: 'Email', href: 'mailto:ibraheemobanla44@gmail.com', text: 'ibraheemobanla44@gmail.com' },
-  { label: 'WhatsApp', href: 'https://wa.me/2349020660127', text: 'Message me on WhatsApp' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ibraheemobanla', text: 'linkedin.com/in/ibraheemobanla' },
-  { label: 'GitHub', href: 'https://github.com/tolatechy', text: 'github.com/tolatechy' },
+const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+
+const services = [
+  {
+    title: 'Referencing and citation',
+    text: 'Getting citations and reference lists right in the style your department asks for, and applying it consistently from the first page to the last.',
+  },
+  {
+    title: 'Editing and proofreading',
+    text: 'Clarity, grammar, structure and academic tone, while keeping your argument and your voice.',
+  },
+  {
+    title: 'Dissertation and thesis planning',
+    text: 'Shaping research questions, chapter structure and a realistic timeline so the whole project holds together.',
+  },
+  {
+    title: 'Literature review guidance',
+    text: 'Finding, organising and critically discussing sources, rather than summarising them one after another.',
+  },
+  {
+    title: 'Statistics and data analysis',
+    text: 'Choosing suitable methods, running the analysis in R or Python, and understanding how to report the results correctly.',
+  },
 ];
+
+const styles = ['Harvard', 'APA', 'Chicago', 'MLA', 'OSCOLA', 'IEEE', 'Vancouver', 'MHRA'];
+
+const experience = [
+  { role: 'Machine Learning Engineer', org: 'TechSTEPS Limited, Lagos', dates: '2023 – 2026' },
+  { role: 'Data Scientist', org: 'Armstrong Global Concepts LLC, Austin, Texas', dates: '2021 – 2023' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.role,
+  email: `mailto:${site.email}`,
+  url: Astro.site?.href,
+  address: { '@type': 'PostalAddress', addressLocality: 'Lagos', addressCountry: 'NG' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Ibadan' },
+  sameAs: [site.linkedin, site.github],
+  knowsAbout: [
+    'Data science',
+    'Machine learning',
+    'Natural language processing',
+    'Academic writing',
+    'Referencing styles',
+    'Dissertation support',
+    'Statistics',
+  ],
+};
 ---
 
 <Base
-  title="Ibraheem Obanla — Data Scientist & Research Writer"
-  description="Ibraheem Obanla is a data scientist and research writer in Lagos, Nigeria, offering machine learning work, NLP research and academic support for students at UK universities."
+  title="Ibraheem Obanla | Data Scientist & Research Writer"
+  description="Data scientist and research writer in Lagos, Nigeria. Dissertation, referencing and editing support for students at UK universities, NLP research, and machine learning work."
+  jsonLd={jsonLd}
 >
-  <main class="mx-auto max-w-2xl px-5 py-16 sm:px-8 sm:py-24">
-    <p class="text-sm font-medium tracking-wide text-muted uppercase">Lagos, Nigeria</p>
-    <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">Ibraheem Obanla</h1>
-    <p class="mt-2 text-xl text-muted">Data Scientist &amp; Research Writer</p>
-
-    <div class="mt-10 space-y-4 text-lg leading-relaxed">
-      <p>
-        I build machine learning models for businesses, carry out research in natural language
-        processing, and help students at UK universities with referencing, editing, dissertations
-        and data analysis.
+  <!-- Introduction -->
+  <section class="container-site grid gap-12 pt-14 pb-20 sm:pt-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16 lg:pb-28">
+    <div>
+      <p class="eyebrow">{site.name} · {site.location}</p>
+      <h1 class="mt-5 max-w-[14ch] text-display font-semibold">Data scientist and research writer</h1>
+      <p class="mt-7 max-w-[38rem] text-lead text-muted">
+        I build machine learning models, carry out research in natural language processing, and help
+        students at UK universities with their dissertations, referencing, editing and data analysis.
       </p>
-      <p>The full site is on its way. In the meantime, you can reach me here.</p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/contact" class="btn btn-primary">Request a quote</a>
+        <a href={site.whatsapp} class="btn btn-secondary">Message me on WhatsApp</a>
+      </div>
     </div>
 
-    <dl class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
-      {links.map((l) => (
-        <div class="flex flex-col gap-1 py-4 sm:flex-row sm:gap-6">
-          <dt class="w-28 shrink-0 text-sm font-medium text-muted">{l.label}</dt>
-          <dd>
-            <a
-              class="text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              href={l.href}
-            >
-              {l.text}
-            </a>
-          </dd>
-        </div>
-      ))}
+    <dl class="border-t-2 border-ink text-[0.9375rem]">
+      <div class="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-4">
+        <dt class="font-semibold">Support</dt>
+        <dd class="text-muted">Research and writing support for students at UK universities</dd>
+      </div>
+      <div class="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-4">
+        <dt class="font-semibold">Research</dt>
+        <dd class="text-muted">NLP for low-resource African languages; machine learning in health</dd>
+      </div>
+      <div class="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-4">
+        <dt class="font-semibold">Data science</dt>
+        <dd class="text-muted">Five years building and deploying models in Python, R and SQL</dd>
+      </div>
+      <div class="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-4">
+        <dt class="font-semibold">Education</dt>
+        <dd class="text-muted">BSc Statistics and MSc Data and Information Science, University of Ibadan</dd>
+      </div>
     </dl>
+  </section>
 
-    <p class="mt-10">
-      <a
-        class="inline-block rounded-md bg-ink px-5 py-3 font-medium text-paper hover:bg-ink/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        href="/resume/Ibraheem_Obanla_Resume.pdf"
-      >
-        Download my resume (PDF)
-      </a>
-    </p>
+  <!-- Research & writing support -->
+  <section id="support" class="bg-sand py-20 lg:py-28" aria-labelledby="support-heading">
+    <div class="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+      <div class="lg:sticky lg:top-10 lg:self-start">
+        <p class="eyebrow">Research &amp; writing support</p>
+        <h2 id="support-heading" class="mt-4 text-h2 font-semibold">
+          Support for students at UK universities
+        </h2>
+        <div class="mt-6 space-y-4 text-muted">
+          <p>
+            Many of the students I work with are Nigerians who have moved to the UK for postgraduate study
+            and are meeting UK academic conventions for the first time: how referencing works, what a
+            literature review is expected to do, and how a dissertation should be structured.
+          </p>
+          <p>
+            I help you understand those expectations and meet them. The support is guidance, editing and
+            feedback. The work you submit stays your own.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="/contact" class="btn btn-primary">Request a quote</a>
+          <p class="mt-3 text-sm text-muted">
+            Tell me your course, level, deadline and what you need help with.
+          </p>
+        </div>
+      </div>
 
-    <footer class="mt-20 text-sm text-muted">© {new Date().getFullYear()} Ibraheem Obanla</footer>
-  </main>
+      <div>
+        <ol class="border-t-2 border-ink">
+          {
+            services.map((s, i) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-line py-6">
+                <span class="pt-0.5 text-sm font-semibold text-muted tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 class="text-h3 font-semibold">{s.title}</h3>
+                  <p class="mt-1.5 text-muted">{s.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+
+        <div class="mt-10">
+          <p class="eyebrow">Referencing styles</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {
+              styles.map((s) => (
+                <li class="rounded-sm border border-ink/25 bg-paper px-3 py-1.5 text-[0.9375rem] font-medium">
+                  {s}
+                </li>
+              ))
+            }
+            <li class="px-1 py-1.5 text-[0.9375rem] text-muted">and others on request</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research" class="container-site py-20 lg:py-28" aria-labelledby="research-heading">
+    <div class="max-w-[44rem]">
+      <p class="eyebrow">Research</p>
+      <h2 id="research-heading" class="mt-4 text-h2 font-semibold">
+        Language technology for African languages, and machine learning in health
+      </h2>
+      <p class="mt-6 text-muted">
+        Most of my current research is on natural language processing for low-resource African languages,
+        starting with Yorùbá: the state of the data that already exists, and which kinds of model work
+        well on real social media text.
+      </p>
+    </div>
+
+    <ul class="mt-12 border-t-2 border-ink">
+      {
+        research.map(({ data }) => (
+          <li class="grid gap-x-10 gap-y-3 border-b border-line py-8 md:grid-cols-[13rem_1fr]">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-2 md:flex-col md:items-start">
+              <StatusBadge status={data.status} />
+              <span class="text-sm text-muted">
+                {data.area} · {data.year}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-h3 font-semibold">{data.title}</h3>
+              <p class="mt-2 max-w-[44rem] text-muted">{data.highlight}</p>
+              {(data.venue || data.coauthors.length > 0) && (
+                <p class="mt-3 text-sm text-muted">
+                  {data.venue}
+                  {data.coauthors.length > 0 && <> · with {data.coauthors.join(' and ')}</>}
+                </p>
+              )}
+              {data.link && (
+                <p class="mt-3 text-[0.9375rem]">
+                  <a class="link font-medium" href={data.link}>
+                    Read on {data.venue ?? 'the publisher site'}
+                  </a>
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+      <p class="font-medium">Working on something related, or want to collaborate?</p>
+      <a href="/contact" class="btn btn-secondary">Let's talk</a>
+    </div>
+  </section>
+
+  <!-- Data science -->
+  <section id="data-science" class="border-t border-line bg-surface py-20 lg:py-28" aria-labelledby="ds-heading">
+    <div class="container-site">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+        <div>
+          <p class="eyebrow">Data science</p>
+          <h2 id="ds-heading" class="mt-4 text-h2 font-semibold">Machine learning for business problems</h2>
+          <p class="mt-6 max-w-[40rem] text-muted">
+            I have spent five years building and deploying models for credit risk, customer retention and
+            security analytics, along with the reporting pipelines and dashboards around them. I work in
+            Python, R and SQL, on AWS and Azure.
+          </p>
+        </div>
+        <ul class="self-end border-t-2 border-ink">
+          {
+            experience.map((e) => (
+              <li class="border-b border-line py-4">
+                <p class="flex flex-wrap justify-between gap-x-4">
+                  <span class="font-semibold">{e.role}</span>
+                  <span class="text-sm text-muted tabular-nums">{e.dates}</span>
+                </p>
+                <p class="text-[0.9375rem] text-muted">{e.org}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <h3 class="mt-16 eyebrow">Selected projects</h3>
+      <ul class="mt-5 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line md:grid-cols-3">
+        {
+          featuredProjects.map((p, i) => (
+            <li class:list={['bg-surface', i === 0 && 'md:col-span-3']}>
+              <a
+                href={p.repo}
+                class:list={[
+                  'group flex h-full flex-col gap-3 p-6 no-underline hover:bg-paper sm:p-8',
+                  i === 0 && 'md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-end md:gap-10 md:py-10',
+                ]}
+              >
+                <div>
+                  <p class="text-sm font-medium text-muted">{p.area}</p>
+                  <p class:list={['mt-2 font-semibold text-ink', i === 0 ? 'text-h2' : 'text-h3']}>{p.title}</p>
+                </div>
+                <div>
+                  <p class="text-muted">{p.summary}</p>
+                  <p class="mt-4 text-[0.9375rem] font-medium text-primary group-hover:underline">
+                    View on GitHub <span aria-hidden="true">→</span>
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-8">
+        <a class="link font-medium" href={site.github}>See all my projects on GitHub</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Closing invitation -->
+  <section class="bg-ink text-paper">
+    <div class="container-site grid gap-8 py-16 md:grid-cols-[1fr_auto] md:items-center lg:py-20">
+      <div>
+        <h2 class="text-h2 font-semibold">Need help with a dissertation, a dataset or a model?</h2>
+        <p class="mt-3 text-paper/75">Send me a few lines about what you need and your deadline.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="/contact" class="btn bg-paper text-ink hover:bg-sand">Request a quote</a>
+        <a href={site.whatsapp} class="btn border border-paper/40 text-paper hover:border-paper">WhatsApp</a>
+      </div>
+    </div>
+  </section>
 </Base>

@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const channels = [
+  { label: 'Email', href: `mailto:${site.email}`, text: site.email, note: 'Best for quotes and anything with attachments' },
+  { label: 'WhatsApp', href: site.whatsapp, text: 'Message me on WhatsApp', note: 'Quick questions' },
+  { label: 'LinkedIn', href: site.linkedin, text: 'linkedin.com/in/ibraheemobanla', note: 'Professional enquiries' },
+  { label: 'GitHub', href: site.github, text: 'github.com/tolatechy', note: 'Code and projects' },
+];
+
+const quoteChecklist = [
+  'Your university, course and level (undergraduate, Master’s or PhD)',
+  'The kind of help you need, e.g. referencing, editing, dissertation planning or data analysis',
+  'The referencing style your department uses',
+  'Your deadline',
+  'Roughly how long the work is, if it’s a document',
+];
+---
+
+<Base
+  title="Contact Ibraheem Obanla | Request a Quote"
+  description="Contact Ibraheem Obanla for a quote on dissertation, referencing, editing and data analysis support, research collaboration, or data science work."
+>
+  <section class="container-site grid gap-14 py-16 sm:py-20 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20 lg:py-24">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h1 class="mt-4 text-display font-semibold">Get in touch</h1>
+      <p class="mt-7 max-w-[34rem] text-lead text-muted">
+        For academic support, research collaboration or data science work. Email is best for quotes.
+      </p>
+
+      <dl class="mt-12 border-t-2 border-ink">
+        {
+          channels.map((c) => (
+            <div class="grid gap-1 border-b border-line py-5 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <dt class="font-semibold">{c.label}</dt>
+              <dd>
+                <a class="link break-all font-medium" href={c.href}>{c.text}</a>
+                <p class="text-sm text-muted">{c.note}</p>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <aside class="self-start rounded-[var(--radius-panel)] bg-sand p-6 sm:p-8 lg:mt-28">
+      <h2 class="text-h3 font-semibold">Requesting a quote for academic work</h2>
+      <p class="mt-2 text-muted">Including these details helps me give you an accurate quote quickly:</p>
+      <ul class="mt-5 space-y-3">
+        {
+          quoteChecklist.map((item) => (
+            <li class="grid grid-cols-[1rem_1fr] gap-3">
+              <span aria-hidden="true" class="mt-[0.6em] h-px w-3 bg-ink" />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        class="btn btn-primary mt-8 w-full sm:w-auto"
+        href={`mailto:${site.email}?subject=${encodeURIComponent('Quote request')}`}
+      >
+        Email a quote request
+      </a>
+    </aside>
+  </section>
+</Base>

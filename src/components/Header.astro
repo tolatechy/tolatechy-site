@@ -1,0 +1,58 @@
+---
+import { nav, site } from '../site';
+
+const items = nav.filter((item) => item.ready);
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => current === href || current.startsWith(href + '/');
+---
+
+<header class="border-b border-line bg-paper">
+  <div class="container-site flex min-h-16 items-center justify-between gap-6 py-3">
+    <a href="/" class="text-lg font-semibold tracking-tight text-ink no-underline">
+      {site.name}
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav aria-label="Main" class="hidden items-center gap-7 md:flex">
+      {
+        items.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+            class="text-[0.9375rem] font-medium text-muted no-underline hover:text-ink aria-[current=page]:text-ink"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact" class="btn btn-primary min-h-10 px-4 text-[0.9375rem]">Request a quote</a>
+    </nav>
+
+    <!-- Phone navigation: a native disclosure, no JavaScript needed -->
+    <details class="group relative md:hidden">
+      <summary
+        class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-[var(--radius-control)] border border-line px-3 font-medium [&::-webkit-details-marker]:hidden"
+      >
+        <span class="group-open:hidden">Menu</span>
+        <span class="hidden group-open:inline">Close</span>
+      </summary>
+      <nav
+        aria-label="Main"
+        class="absolute right-0 z-20 mt-2 w-64 rounded-[var(--radius-panel)] border border-line bg-surface p-2 shadow-lg"
+      >
+        {
+          items.map((item) => (
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              class="block rounded-[var(--radius-control)] px-3 py-3 font-medium text-ink no-underline hover:bg-sand aria-[current=page]:bg-sand"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        <a href="/contact" class="btn btn-primary mt-2 w-full">Request a quote</a>
+      </nav>
+    </details>
+  </div>
+</header>
