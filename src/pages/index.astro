@@ -9,6 +9,7 @@ import ToolLogo from '../components/ToolLogo.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../site';
 import { featuredProjects } from '../data/featured-projects';
+import heroPhoto from '../assets/hero/analytics-screen.jpg';
 
 const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 
@@ -68,28 +69,47 @@ const jsonLd = {
   description="Data scientist and research writer in Lagos, Nigeria. Machine learning models, NLP research, and dissertation, referencing and editing support for students at UK universities."
   jsonLd={jsonLd}
 >
-  <!-- ───────────── Hero ───────────── -->
-  <section class="container-site pt-14 text-center sm:pt-20 lg:pt-24">
-    <p class="enter inline-flex items-center gap-2 rounded-full bg-stage px-3.5 py-1.5 text-sm text-muted">
-      <span class="relative flex size-2">
-        <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60 motion-reduce:hidden"></span>
-        <span class="relative inline-flex size-2 rounded-full bg-primary"></span>
-      </span>
-      Available for data science work<span class="hidden sm:inline"> · {site.location}</span>
-    </p>
-    <h1 class="enter mx-auto mt-6 max-w-[14ch] text-hero font-bold" style="--d: 80ms">
-      Data scientist and research writer.
-    </h1>
-    <p class="enter mx-auto mt-6 max-w-[34rem] text-lead text-muted" style="--d: 160ms">
-      I build machine learning models, research language technology, and help students get their research right.
-    </p>
-    <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
-      <a href={site.hire} class="btn btn-primary">Hire me</a>
-      <a href="#work" class="btn btn-secondary">View my work <Icon name="ArrowDown" class="size-4" /></a>
+  <!-- ───────────── Hero: photo underlay with dark shade ───────────── -->
+  <section class="relative isolate mx-2 -mt-[4.25rem] overflow-hidden rounded-b-[2rem] bg-[#07110f] sm:mx-3 sm:-mt-[4.75rem] sm:rounded-b-[2.5rem]">
+    <Image
+      src={heroPhoto}
+      alt=""
+      widths={[800, 1280, 1920, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 -z-20 h-full w-full scale-105 object-cover object-[70%_center] opacity-90"
+    />
+    <!-- shade: darkens the photo so white text reads clearly -->
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[#07110f]/75"></div>
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-b from-[#07110f]/60 via-transparent to-[#07110f]"></div>
+    <div aria-hidden="true" class="absolute -top-40 left-1/2 -z-10 size-[44rem] -translate-x-1/2 rounded-full bg-primary/35 blur-3xl"></div>
+
+    <div class="container-site pt-36 pb-48 text-center text-paper sm:pt-44 sm:pb-64 lg:pt-48 lg:pb-72">
+      <p class="enter inline-flex items-center gap-2 rounded-full border border-paper/15 bg-paper/10 px-3.5 py-1.5 text-sm text-paper/80 backdrop-blur">
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-[#5fe0c4] opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-[#5fe0c4]"></span>
+        </span>
+        Available for data science work<span class="hidden sm:inline"> · {site.location}</span>
+      </p>
+      <h1 class="enter mx-auto mt-6 max-w-[16ch] text-hero font-bold" style="--d: 80ms">
+        Data Scientist and Research Writer.
+      </h1>
+      <p class="enter mx-auto mt-6 max-w-[34rem] text-lead text-paper/75" style="--d: 160ms">
+        I build machine learning models, research language technology, and help students get their research right.
+      </p>
+      <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
+        <a href={site.hire} class="btn bg-paper text-ink hover:bg-stage">Hire me</a>
+        <a href="#work" class="btn border border-paper/25 text-paper backdrop-blur hover:bg-paper/10">
+          View my work <Icon name="ArrowDown" class="size-4" />
+        </a>
+      </div>
     </div>
   </section>
 
-  <div class="container-site mt-14 sm:mt-16">
+  <!-- Notebook + citation visual, overlapping the bottom of the hero -->
+  <div class="relative z-10 container-site -mt-32 sm:-mt-48 lg:-mt-56">
     <HeroVisual />
   </div>
 
