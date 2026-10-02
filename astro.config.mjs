@@ -6,8 +6,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // The live address. Change to https://ibraheemobanla.com once the domain is connected.
-  site: 'https://tolatechy.tolatechy.workers.dev',
+  // The live address, used for the sitemap, canonical links and share previews.
+  site: 'https://ibraheemobanla.com',
 
   vite: {
     plugins: [tailwindcss()]
