@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import ToolLogo from '../components/ToolLogo.astro';
 import { site } from '../site';
+import { fullName, person } from '../data/person';
 import portrait from '../assets/people/ibraheem-obanla.jpg';
 
 const facts = [
@@ -33,6 +34,7 @@ const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 
 ---
 
 <Base
+  jsonLd={{ '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: person(Astro.site?.href) }}
   title="About Ibraheem Obanla | Data Scientist & Research Analyst"
   description="Ibraheem Obanla is a statistics-trained data scientist and research analyst working in machine learning, NLP research and academic support for students."
 >
@@ -102,6 +104,10 @@ const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 
       <p>
         <span class="font-medium text-ink">I studied statistics at the University of Ibadan,</span> followed by an MSc in
         Data and Information Science there.
+      </p>
+      <p>
+        My full name is <span class="font-medium text-ink">{fullName}</span> (Obanla Ibraheem Omotolani), which is the
+        name on my publications.
       </p>
       <p>
         I worked as a data scientist for Armstrong Global Concepts, then as a machine learning engineer at

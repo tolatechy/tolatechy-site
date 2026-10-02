@@ -8,6 +8,7 @@ import CitationCard from '../components/CitationCard.astro';
 import ToolLogo from '../components/ToolLogo.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../site';
+import { person } from '../data/person';
 import heroPhoto from '../assets/hero/analytics-screen.jpg';
 
 const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
@@ -45,26 +46,7 @@ const researchIcon: Record<string, 'HeartPulse' | 'Languages' | 'Database'> = {
   'Language data and policy': 'Database',
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: site.name,
-  alternateName: ['TolaTechy', `@${site.handle}`],
-  jobTitle: site.role,
-  email: `mailto:${site.email}`,
-  url: Astro.site?.href,
-  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Ibadan' },
-  sameAs: [site.linkedin, site.github],
-  knowsAbout: [
-    'Data science',
-    'Machine learning',
-    'Natural language processing',
-    'Academic writing',
-    'Referencing styles',
-    'Dissertation support',
-    'Statistics',
-  ],
-};
+const jsonLd = { '@context': 'https://schema.org', ...person(Astro.site?.href) };
 ---
 
 <Base
