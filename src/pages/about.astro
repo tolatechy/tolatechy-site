@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHeader from '../components/PageHeader.astro';
+import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import ToolLogo from '../components/ToolLogo.astro';
 import { site } from '../site';
+import portrait from '../assets/people/ibraheem-obanla.jpg';
 
 const facts = [
   { icon: 'MapPin', label: 'Based in', value: site.location },
@@ -35,17 +36,45 @@ const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 
   title="About Ibraheem Obanla | Data Scientist & Research Writer"
   description="Ibraheem Obanla is a statistics-trained data scientist and research writer in Lagos, Nigeria, working in machine learning, NLP research and academic support for students."
 >
-  <PageHeader
-    eyebrow="About"
-    title="Hi, I'm Ibraheem."
-    lead="A data scientist and research writer in Lagos, trained in statistics. I work where data, research and writing meet."
-  />
+  <!-- Intro with portrait -->
+  <section class="container-site grid items-center gap-12 pt-10 pb-16 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16 lg:pt-20 lg:pb-24">
+    <div class="order-2 text-center lg:order-1 lg:text-left">
+      <p class="enter inline-flex items-center gap-2 rounded-full bg-stage px-3.5 py-1.5 text-sm text-muted">About</p>
+      <h1 class="enter mt-6 text-display font-bold" style="--d: 80ms">Hi, I'm Ibraheem.</h1>
+      <p class="enter mx-auto mt-6 max-w-[34rem] text-lead text-muted lg:mx-0" style="--d: 160ms">
+        A data scientist and research writer in Lagos, trained in statistics. I work where data, research and writing meet.
+      </p>
+      <div class="enter mt-8 flex flex-wrap justify-center gap-2.5 lg:justify-start" style="--d: 240ms">
+        <a href={site.hire} class="btn btn-primary">Hire me</a>
+        <a href={site.resumePdf} class="btn btn-secondary"><Icon name="Download" class="size-4" /> Resume</a>
+      </div>
+    </div>
 
-  <!-- Facts stage (the owner's photo will go here) -->
+    <div class="enter relative order-1 mx-auto w-full max-w-[26rem] lg:order-2 lg:max-w-[30rem]" style="--d: 120ms">
+      <div aria-hidden="true" class="absolute -inset-3 -z-10 rounded-[2.25rem] bg-stage sm:-inset-8 sm:rounded-[2.5rem]"></div>
+      <div aria-hidden="true" class="absolute -top-10 -right-10 -z-10 size-64 rounded-full bg-primary-soft blur-3xl"></div>
+      <div aria-hidden="true" class="absolute -bottom-12 -left-10 -z-10 size-56 rounded-full bg-[#fbefd5] blur-3xl"></div>
+      <Image
+        src={portrait}
+        alt="Portrait of Ibraheem Obanla in academic dress"
+        widths={[400, 640, 960]}
+        sizes="(min-width: 1024px) 480px, (min-width: 640px) 416px, 90vw"
+        class="aspect-[4/5] w-full rounded-[1.75rem] object-cover shadow-[0_40px_80px_-40px_rgb(17_17_19/0.6)]"
+        loading="eager"
+      />
+      <div class="float-a absolute -left-3 bottom-10 flex items-center gap-2.5 rounded-full bg-white py-1.5 pr-4 pl-1.5 shadow-[0_14px_30px_-14px_rgb(17_17_19/0.45)] sm:-left-8">
+        <span class="grid size-8 place-items-center rounded-full bg-stage"><Icon name="GraduationCap" class="size-4" /></span>
+        <span class="text-[0.8125rem] leading-tight"><span class="block font-medium">BSc Statistics</span><span class="text-muted">University of Ibadan</span></span>
+      </div>
+      <div class="float-c absolute -right-3 top-10 sm:-right-8">
+        <ToolLogo slug="siPython" class="size-12" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick facts -->
   <section class="container-site">
-    <div class="stage relative isolate overflow-hidden p-5 sm:p-10">
-      <div aria-hidden="true" class="absolute -top-32 -left-20 -z-10 size-96 rounded-full bg-primary-soft blur-3xl"></div>
-      <div aria-hidden="true" class="absolute -right-20 -bottom-32 -z-10 size-96 rounded-full bg-[#fbefd5] blur-3xl"></div>
+    <div class="stage relative isolate overflow-hidden p-5 sm:p-8">
       <dl class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {
           facts.map((f, i) => (
