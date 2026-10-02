@@ -1,7 +1,7 @@
 # ibraheemobanla.com
 
 Source for [ibraheemobanla.com](https://ibraheemobanla.com), the personal site of Ibraheem Obanla,
-Data Scientist & Research Writer.
+Data Scientist & Research Analyst.
 
 Built with [Astro](https://astro.build) and Tailwind CSS, hosted on Cloudflare Pages.
 
