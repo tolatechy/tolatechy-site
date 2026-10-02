@@ -1,0 +1,25 @@
+---
+// A tool's logo in its brand colour, from Simple Icons (https://simpleicons.org, CC0).
+// Usage: <ToolLogo slug="siPython" />. Logos identify tools Ibraheem uses; no endorsement implied.
+import * as icons from 'simple-icons';
+
+interface Props {
+  slug: keyof typeof icons;
+  class?: string;
+  /** Render the logo in white on its brand colour instead of brand colour on white. */
+  filled?: boolean;
+}
+
+const { slug, class: className = 'size-14', filled = false } = Astro.props;
+const icon = icons[slug] as { title: string; hex: string; path: string };
+---
+
+<span
+  class:list={['grid place-items-center rounded-2xl shadow-[0_12px_30px_-14px_rgb(17_17_19/0.4)]', className]}
+  style={filled ? `background:#${icon.hex}` : 'background:#fff'}
+  title={icon.title}
+>
+  <svg viewBox="0 0 24 24" class="size-[52%]" role="img" aria-label={icon.title}>
+    <path d={icon.path} fill={filled ? '#fff' : `#${icon.hex}`}></path>
+  </svg>
+</span>

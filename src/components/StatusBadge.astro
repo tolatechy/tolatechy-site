@@ -21,7 +21,7 @@ const styles: Record<Status, string> = {
 const { status } = Astro.props;
 ---
 
-<span class:list={['inline-flex items-center gap-1.5 rounded-sm px-2 py-0.5 text-sm font-semibold', styles[status]]}>
+<span class:list={['inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.8125rem] font-medium', styles[status]]}>
   <span aria-hidden="true" class="size-1.5 rounded-full bg-current"></span>
   {labels[status]}
 </span>

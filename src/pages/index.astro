@@ -4,61 +4,42 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import StatusBadge from '../components/StatusBadge.astro';
 import HeroVisual from '../components/HeroVisual.astro';
+import CitationCard from '../components/CitationCard.astro';
+import ToolLogo from '../components/ToolLogo.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../site';
 import { featuredProjects } from '../data/featured-projects';
 
 const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 
-const referencingStyles = ['Harvard', 'APA', 'Chicago', 'MLA', 'OSCOLA', 'IEEE', 'Vancouver', 'MHRA'];
-
-const services = [
-  {
-    icon: 'PenLine',
-    title: 'Editing and proofreading',
-    text: 'Clarity, grammar, structure and academic tone, while keeping your argument and your voice.',
-  },
-  {
-    icon: 'Map',
-    title: 'Dissertation and thesis planning',
-    text: 'Shaping research questions, chapter structure and a realistic timeline so the whole project holds together.',
-  },
-  {
-    icon: 'Library',
-    title: 'Literature review guidance',
-    text: 'Finding, organising and critically discussing sources, rather than summarising them one after another.',
-  },
-  {
-    icon: 'ChartColumn',
-    title: 'Statistics and data analysis',
-    text: 'Choosing suitable methods, running the analysis in R or Python, and understanding how to report the results correctly.',
-  },
+const tools = [
+  'siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 'siPandas', 'siNumpy',
+  'siJupyter', 'siKeras', 'siStreamlit', 'siFlask', 'siFastapi', 'siSpacy', 'siGit',
 ] as const;
-
-const stats = [
-  { value: 5, suffix: '', label: 'years in data science and machine learning' },
-  { value: referencingStyles.length, suffix: '+', label: 'referencing styles, used to UK university standards' },
-  { value: 16, suffix: '', label: 'open-source data science projects on GitHub' },
-  { value: research.length, suffix: '', label: 'current research projects' },
+// Positions for the floating logo cloud on wide screens (percent of the area).
+const spots = [
+  [6, 10], [24, 2], [44, 14], [66, 4], [86, 12], [94, 42], [80, 72],
+  [60, 92], [36, 90], [14, 74], [3, 46], [78, 32], [20, 36], [96, 80],
 ];
-
-const areaIcon: Record<string, 'HeartPulse' | 'Languages' | 'FlaskConical'> = {
-  'Machine learning in health': 'HeartPulse',
-  'Natural language processing': 'Languages',
-  'Language data and policy': 'Languages',
-};
-const statusBar = {
-  preprint: 'bg-status-preprint',
-  'under-review': 'bg-gold',
-  'in-progress': 'bg-status-progress',
-};
 
 const experience = [
-  { role: 'Machine Learning Engineer', org: 'TechSTEPS Limited, Lagos', dates: '2023 – 2026' },
-  { role: 'Data Scientist', org: 'Armstrong Global Concepts LLC, Austin, Texas', dates: '2021 – 2023' },
+  { role: 'Machine Learning Engineer', org: 'TechSTEPS Limited', dates: '2023–2026' },
+  { role: 'Data Scientist', org: 'Armstrong Global Concepts', dates: '2021–2023' },
 ];
 
-const [leadProject, ...otherProjects] = featuredProjects;
+const services = [
+  { icon: 'Quote', title: 'Referencing', text: 'Harvard, APA, Chicago, MLA, OSCOLA and more' },
+  { icon: 'PenLine', title: 'Editing and proofreading', text: 'Clarity, structure and academic tone' },
+  { icon: 'Map', title: 'Dissertation planning', text: 'Questions, chapters and timelines' },
+  { icon: 'Library', title: 'Literature reviews', text: 'Organising and critiquing sources' },
+  { icon: 'ChartColumn', title: 'Statistics and analysis', text: 'Methods, R or Python, reporting' },
+] as const;
+
+const researchIcon: Record<string, 'HeartPulse' | 'Languages' | 'Database'> = {
+  'Machine learning in health': 'HeartPulse',
+  'Natural language processing': 'Languages',
+  'Language data and policy': 'Database',
+};
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -84,308 +65,233 @@ const jsonLd = {
 
 <Base
   title="Ibraheem Obanla | Data Scientist & Research Writer"
-  description="Data scientist and research writer in Lagos, Nigeria. Dissertation, referencing and editing support for students at UK universities, NLP research, and machine learning work."
+  description="Data scientist and research writer in Lagos, Nigeria. Machine learning models, NLP research, and dissertation, referencing and editing support for students at UK universities."
   jsonLd={jsonLd}
 >
   <!-- ───────────── Hero ───────────── -->
-  <section class="relative overflow-hidden">
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem] bg-linear-to-b from-sand/70 to-transparent"
-    >
-    </div>
-    <div
-      class="container-site grid items-center gap-16 pt-14 pb-24 sm:pt-20 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-14 lg:pt-24 lg:pb-32"
-    >
-      <div>
-        <p class="enter eyebrow flex items-center gap-2" style="--d: 0ms">
-          <span class="inline-block size-2 rounded-full bg-primary"></span>
-          {site.location}
-        </p>
-        <h1 class="enter mt-5 text-display font-semibold" style="--d: 80ms">
-          Data scientist and
-          <span class="relative inline-block whitespace-nowrap">
-            research writer
-            <svg
-              aria-hidden="true"
-              class="draw-underline absolute -bottom-2 left-0 h-3 w-full text-gold"
-              viewBox="0 0 300 12"
-              preserveAspectRatio="none"
-            >
-              <path d="M2 9 C 60 3, 140 2, 298 6" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"></path>
-            </svg>
-          </span>
-        </h1>
-        <p class="enter mt-8 max-w-[36rem] text-lead text-muted" style="--d: 160ms">
-          I build machine learning models, carry out research in natural language processing, and help students at UK
-          universities with their dissertations, referencing, editing and data analysis.
-        </p>
-        <div class="enter mt-9 flex flex-wrap gap-3" style="--d: 240ms">
-          <a href="/contact" class="btn btn-primary group">
-            Request a quote
-            <span class="transition-transform group-hover:translate-x-0.5"><Icon name="ArrowRight" class="size-4" /></span>
-          </a>
-          <a href={site.whatsapp} class="btn btn-secondary">
-            <Icon name="MessageCircle" class="size-4" />
-            WhatsApp
-          </a>
-        </div>
-        <ul class="enter mt-10 flex flex-wrap gap-x-6 gap-y-3 text-[0.9375rem] text-muted" style="--d: 320ms">
-          <li class="flex items-center gap-2"><Icon name="GraduationCap" class="size-4 text-primary" /> University of Ibadan</li>
-          <li class="flex items-center gap-2"><Icon name="Code" class="size-4 text-primary" /> Python · R · SQL</li>
-          <li class="flex items-center gap-2"><Icon name="BookOpenCheck" class="size-4 text-primary" /> UK academic conventions</li>
-        </ul>
-      </div>
-
-      <HeroVisual />
+  <section class="container-site pt-14 text-center sm:pt-20 lg:pt-24">
+    <p class="enter inline-flex items-center gap-2 rounded-full bg-stage px-3.5 py-1.5 text-sm text-muted">
+      <span class="relative flex size-2">
+        <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60 motion-reduce:hidden"></span>
+        <span class="relative inline-flex size-2 rounded-full bg-primary"></span>
+      </span>
+      Available for data science work<span class="hidden sm:inline"> · {site.location}</span>
+    </p>
+    <h1 class="enter mx-auto mt-6 max-w-[14ch] text-hero font-bold" style="--d: 80ms">
+      Data scientist and research writer.
+    </h1>
+    <p class="enter mx-auto mt-6 max-w-[34rem] text-lead text-muted" style="--d: 160ms">
+      I build machine learning models, research language technology, and help students get their research right.
+    </p>
+    <div class="enter mt-8 flex flex-wrap justify-center gap-2.5" style="--d: 240ms">
+      <a href={site.hire} class="btn btn-primary">Hire me</a>
+      <a href="#work" class="btn btn-secondary">View my work <Icon name="ArrowDown" class="size-4" /></a>
     </div>
   </section>
 
-  <!-- ───────────── Numbers ───────────── -->
-  <section aria-label="At a glance" class="border-y border-line bg-surface">
-    <dl class="container-site grid grid-cols-2 lg:grid-cols-4">
-      {
-        stats.map((s, i) => (
-          <div
-            data-reveal
-            style={`--d: ${i * 90}ms`}
-            class:list={[
-              'py-8 pr-4 sm:py-10',
-              i % 2 === 1 && 'border-l border-line pl-5 sm:pl-8',
-              i >= 2 && 'border-t border-line lg:border-t-0',
-              i === 2 && 'lg:border-l lg:pl-8',
-            ]}
-          >
-            <dt class="sr-only">{s.label}</dt>
-            <dd>
-              <span class="block text-[clamp(2.25rem,1.6rem+2.4vw,3.25rem)] leading-none font-semibold tracking-tight tabular-nums">
-                <span data-count={s.value}>{s.value}</span>{s.suffix}
-              </span>
-              <span aria-hidden="true" class="mt-3 block max-w-[15rem] text-[0.9375rem] text-muted">{s.label}</span>
-            </dd>
-          </div>
-        ))
-      }
-    </dl>
-  </section>
+  <div class="container-site mt-14 sm:mt-16">
+    <HeroVisual />
+  </div>
 
-  <!-- ───────────── Research & writing support ───────────── -->
-  <section id="support" class="bg-sand py-20 lg:py-28" aria-labelledby="support-heading">
-    <div class="container-site">
-      <div data-reveal class="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
-        <div>
-          <p class="eyebrow">Research &amp; writing support</p>
-          <h2 id="support-heading" class="mt-4 max-w-[22ch] text-h2 font-semibold">
-            Support for students at UK universities
-          </h2>
-        </div>
-        <p class="text-muted">
-          Many of the students I work with are Nigerians who have moved to the UK for postgraduate study and are meeting UK
-          academic conventions for the first time. I help you understand what's expected and meet it.
-        </p>
-      </div>
-
-      <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Lead tile: referencing -->
-        <article data-reveal class="panel panel-hover relative overflow-hidden p-7 sm:p-8 md:col-span-2">
-          <div aria-hidden="true" class="dot-grid absolute inset-y-0 right-0 w-1/2 [mask-image:linear-gradient(to_left,black,transparent)]"></div>
-          <div class="relative">
-            <span class="icon-chip"><Icon name="Quote" /></span>
-            <h3 class="mt-5 text-h3 font-semibold">Referencing and citation</h3>
-            <p class="mt-2 max-w-[34rem] text-muted">
-              Getting citations and reference lists right in the style your department asks for, and applying it
-              consistently from the first page to the last.
-            </p>
-            <ul class="mt-6 flex flex-wrap gap-2">
-              {
-                referencingStyles.map((s) => (
-                  <li class="rounded-full border border-ink/15 bg-paper px-3 py-1 text-sm font-semibold">{s}</li>
-                ))
-              }
-              <li class="px-1 py-1 text-sm text-muted">and others on request</li>
-            </ul>
-          </div>
-        </article>
-
+  <!-- ───────────── Tools and numbers ───────────── -->
+  <section aria-label="Tools and experience" class="container-site py-20 sm:py-28">
+    <div class="relative mx-auto max-w-[64rem]">
+      <!-- floating logo cloud (wide screens) -->
+      <div aria-hidden="true" class="absolute inset-0 hidden lg:block">
         {
-          services.map((s, i) => (
-            <article data-reveal style={`--d: ${(i % 3) * 90}ms`} class="panel panel-hover group p-7 sm:p-8">
-              <span class="icon-chip transition-colors group-hover:bg-primary group-hover:text-paper">
-                <Icon name={s.icon} />
-              </span>
-              <h3 class="mt-5 text-h3 font-semibold">{s.title}</h3>
-              <p class="mt-2 text-muted">{s.text}</p>
-            </article>
+          tools.map((t, i) => (
+            <div
+              class:list={['absolute -translate-x-1/2 -translate-y-1/2', ['float-a', 'float-b', 'float-c'][i % 3]]}
+              style={`left:${spots[i][0]}%; top:${spots[i][1]}%`}
+            >
+              <ToolLogo slug={t} class={i % 4 === 0 ? 'size-14' : 'size-12'} />
+            </div>
           ))
         }
       </div>
 
-      <div data-reveal class="mt-10 flex flex-col gap-6 rounded-[var(--radius-panel)] border border-ink/10 bg-paper p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
-        <p class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary"><Icon name="ShieldCheck" class="size-6" /></span>
-          <span>
-            <span class="font-semibold">Guidance, editing and feedback.</span>
-            <span class="text-muted"> The work you submit stays your own.</span>
-          </span>
+      <div data-reveal class="relative py-4 text-center lg:py-28">
+        <p class="font-medium">Five years in data science and research</p>
+        <p class="mt-4 text-[clamp(2.25rem,1.3rem+3.6vw,4rem)] leading-[1.08] font-bold tracking-[-0.04em] text-ink/25">
+          <span class="text-ink"><span data-count="16">16</span> projects</span><br />
+          <span class="text-ink/45"><span data-count="3">3</span> research projects</span><br />
+          <span><span data-count="8">8</span>+ citation styles</span>
         </p>
-        <a href="/contact" class="btn btn-primary shrink-0">Request a quote</a>
       </div>
+
+      <!-- logo row (phones and tablets) -->
+      <ul class="mt-10 flex flex-wrap justify-center gap-3 lg:hidden" aria-label="Tools I use">
+        {tools.map((t) => <li><ToolLogo slug={t} class="size-11" /></li>)}
+      </ul>
     </div>
   </section>
 
-  <!-- ───────────── Research ───────────── -->
-  <section id="research" class="container-site py-20 lg:py-28" aria-labelledby="research-heading">
-    <div data-reveal class="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
-      <div>
-        <p class="eyebrow">Research</p>
-        <h2 id="research-heading" class="mt-4 text-h2 font-semibold">
-          Language technology for African languages, and machine learning in health
-        </h2>
-      </div>
-      <p class="text-muted">
-        Most of my current research is on natural language processing for low-resource African languages, starting with
-        Yorùbá: the state of the data that already exists, and which kinds of model work well on real social media text.
+  <!-- ───────────── Data science ───────────── -->
+  <section id="work" class="scroll-mt-24 container-site pb-24 sm:pb-32" aria-labelledby="ds-heading">
+    <div data-reveal class="mx-auto max-w-[44rem] text-center">
+      <p class="eyebrow">Data science</p>
+      <h2 id="ds-heading" class="mt-3 text-h2 font-bold">Machine learning for real business problems.</h2>
+      <p class="mx-auto mt-5 max-w-[32rem] text-lead text-muted">
+        Credit risk, customer retention and security analytics, from first notebook to deployed model.
       </p>
+      <ul class="mt-7 flex flex-wrap justify-center gap-2">
+        {
+          experience.map((e) => (
+            <li class="inline-flex items-center gap-2 rounded-full border border-line px-3.5 py-1.5 text-sm">
+              <Icon name="Briefcase" class="size-3.5 shrink-0 text-muted" />
+              <span class="font-medium whitespace-nowrap">{e.role}</span>
+              <span class="hidden text-muted sm:inline">· {e.org}</span>
+              <span class="text-muted whitespace-nowrap">· {e.dates}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <ul class="mt-12 grid gap-4 lg:grid-cols-3">
+    <ul class="mt-14 grid gap-x-5 gap-y-12 md:grid-cols-2">
       {
-        research.map(({ data }, i) => (
-          <li data-reveal style={`--d: ${i * 110}ms`} class="panel panel-hover relative flex flex-col overflow-hidden p-7">
-            <span aria-hidden="true" class:list={['absolute inset-x-0 top-0 h-1', statusBar[data.status]]} />
-            <div class="flex items-center justify-between gap-3">
-              <StatusBadge status={data.status} />
-              <span class="text-muted">
-                <Icon name={areaIcon[data.area] ?? 'FlaskConical'} class="size-5" />
-              </span>
-            </div>
-            <p class="mt-5 text-sm text-muted">
-              {data.area} · {data.year}
-            </p>
-            <h3 class="mt-1.5 text-h3 font-semibold">{data.title}</h3>
-            <p class="mt-3 text-muted">{data.highlight}</p>
-            <div class="mt-auto pt-6 text-sm text-muted">
-              {data.venue}
-              {data.coauthors.length > 0 && <> · with {data.coauthors.join(' and ')}</>}
-              {data.link && (
-                <a class="link mt-3 flex items-center gap-1 text-[0.9375rem] font-semibold" href={data.link}>
-                  Read on {data.venue} <Icon name="ArrowUpRight" class="size-4" />
-                </a>
-              )}
-            </div>
+        featuredProjects.map((p, i) => (
+          <li data-reveal style={`--d: ${(i % 2) * 120}ms`}>
+            <a href={p.repo} class="group block no-underline">
+              <div class="stage relative overflow-hidden p-5 pb-0 sm:p-8 sm:pb-0">
+                <div class="window translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <div class="window-bar">
+                    <i></i><i></i><i></i>
+                    <span class="ml-2 truncate">{p.repo.split('/').pop()}.ipynb</span>
+                  </div>
+                  <div class="aspect-[16/10] overflow-hidden bg-white p-3">
+                    <Image
+                      src={p.image}
+                      alt={p.imageAlt}
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 768px) 560px, 100vw"
+                      class="h-full w-full object-contain object-top"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="mt-5 flex items-start justify-between gap-4 px-1">
+                <div>
+                  <p class="text-sm text-muted">{p.area}</p>
+                  <h3 class="mt-1 text-h3 font-semibold text-ink">{p.title}</h3>
+                  <p class="mt-1.5 text-muted">{p.summary}</p>
+                </div>
+                <span class="mt-1 grid size-10 shrink-0 place-items-center rounded-full bg-stage text-ink transition-colors group-hover:bg-ink group-hover:text-paper">
+                  <Icon name="ArrowUpRight" class="size-4" />
+                </span>
+              </div>
+            </a>
           </li>
         ))
       }
     </ul>
 
-    <div data-reveal class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-      <p class="font-medium">Working on something related, or want to collaborate?</p>
-      <a href="/contact" class="btn btn-secondary">Let's talk</a>
+    <div data-reveal class="mt-14 flex flex-wrap justify-center gap-2.5">
+      <a href={site.hire} class="btn btn-primary">Hire me</a>
+      <a href={site.github} class="btn btn-secondary">All projects on GitHub <Icon name="ArrowUpRight" class="size-4" /></a>
     </div>
   </section>
 
-  <!-- ───────────── Data science ───────────── -->
-  <section id="data-science" class="border-t border-line bg-surface py-20 lg:py-28" aria-labelledby="ds-heading">
+  <!-- ───────────── Research ───────────── -->
+  <section id="research" class="border-t border-line py-24 sm:py-32" aria-labelledby="research-heading">
     <div class="container-site">
-      <div data-reveal class="grid gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-16">
-        <div>
-          <p class="eyebrow">Data science</p>
-          <h2 id="ds-heading" class="mt-4 text-h2 font-semibold">Machine learning for business problems</h2>
-          <p class="mt-6 max-w-[40rem] text-muted">
-            I have spent five years building and deploying models for credit risk, customer retention and security
-            analytics, along with the reporting pipelines and dashboards around them. I work in Python, R and SQL, on AWS
-            and Azure.
-          </p>
-        </div>
-        <ol class="relative self-end border-l-2 border-line pl-6">
-          {
-            experience.map((e) => (
-              <li class="relative pb-6 last:pb-0">
-                <span aria-hidden="true" class="absolute top-1.5 -left-[1.95rem] size-3 rounded-full border-2 border-surface bg-primary ring-2 ring-primary-soft" />
-                <p class="text-sm font-medium text-muted tabular-nums">{e.dates}</p>
-                <p class="mt-0.5 font-semibold">{e.role}</p>
-                <p class="text-[0.9375rem] text-muted">{e.org}</p>
-              </li>
-            ))
-          }
-        </ol>
+      <div data-reveal class="mx-auto max-w-[44rem] text-center">
+        <p class="eyebrow">Research</p>
+        <h2 id="research-heading" class="mt-3 text-h2 font-bold">Language technology and machine learning in health.</h2>
+        <p class="mx-auto mt-5 max-w-[32rem] text-lead text-muted">
+          NLP for low-resource African languages, starting with Yorùbá.
+        </p>
       </div>
 
-      <h3 class="mt-16 eyebrow">Selected projects</h3>
-
-      <!-- Lead project -->
-      <a
-        data-reveal
-        href={leadProject.repo}
-        class="panel group mt-5 grid overflow-hidden no-underline md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]"
-      >
-        <div class="flex flex-col justify-center p-7 sm:p-10">
-          <p class="text-sm font-medium text-muted">{leadProject.area}</p>
-          <p class="mt-2 text-h2 font-semibold text-ink">{leadProject.title}</p>
-          <p class="mt-4 text-muted">{leadProject.summary}</p>
-          <p class="mt-6 flex items-center gap-1 font-semibold text-primary">
-            View on GitHub <Icon name="ArrowUpRight" class="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </p>
-        </div>
-        <div class="chart-thumb flex items-center justify-center overflow-hidden p-6 sm:p-10">
-          <Image src={leadProject.image} alt={leadProject.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 768px) 55vw, 100vw" class="w-full max-w-[34rem] rounded-md" />
-        </div>
-      </a>
-
-      <ul class="mt-4 grid gap-4 md:grid-cols-3">
+      <ul class="mt-14 grid gap-5 md:grid-cols-3">
         {
-          otherProjects.map((p, i) => (
-            <li data-reveal style={`--d: ${i * 90}ms`}>
-              <a href={p.repo} class="panel panel-hover group flex h-full flex-col overflow-hidden no-underline">
-                <div class="chart-thumb aspect-[16/10] overflow-hidden p-4">
-                  <Image src={p.image} alt={p.imageAlt} widths={[400, 640]} sizes="(min-width: 768px) 30vw, 100vw" class="h-full w-full rounded object-cover object-top" />
-                </div>
-                <div class="flex flex-1 flex-col p-6">
-                  <p class="text-sm font-medium text-muted">{p.area}</p>
-                  <p class="mt-1.5 text-h3 font-semibold text-ink">{p.title}</p>
-                  <p class="mt-2 text-muted">{p.summary}</p>
-                  <p class="mt-auto flex items-center gap-1 pt-5 text-[0.9375rem] font-semibold text-primary">
-                    View on GitHub <Icon name="ArrowUpRight" class="size-4" />
-                  </p>
-                </div>
-              </a>
+          research.map(({ data }, i) => (
+            <li data-reveal style={`--d: ${i * 110}ms`} class="flex flex-col">
+              <div class="stage relative grid aspect-[4/3] place-items-center overflow-hidden">
+                <div aria-hidden="true" class:list={[
+                  'absolute size-48 rounded-full blur-2xl',
+                  data.status === 'preprint' && 'bg-status-preprint-bg',
+                  data.status === 'under-review' && 'bg-status-review-bg',
+                  data.status === 'in-progress' && 'bg-status-progress-bg',
+                ]} />
+                <span class="relative grid size-20 place-items-center rounded-[1.5rem] bg-white shadow-[0_20px_40px_-20px_rgb(17_17_19/0.45)]">
+                  <Icon name={researchIcon[data.area] ?? 'FlaskConical'} class="size-9" strokeWidth={1.5} />
+                </span>
+                <span class="absolute top-4 left-4"><StatusBadge status={data.status} /></span>
+              </div>
+              <div class="mt-5 px-1">
+                <p class="text-sm text-muted">{data.area} · {data.year}</p>
+                <h3 class="mt-1 text-h3 font-semibold">{data.title}</h3>
+                <p class="mt-1.5 text-muted">{data.highlight}</p>
+                {data.link && (
+                  <a class="link mt-3 inline-flex items-center gap-1 text-[0.9375rem] font-medium" href={data.link}>
+                    Read on {data.venue} <Icon name="ArrowUpRight" class="size-4" />
+                  </a>
+                )}
+              </div>
             </li>
           ))
         }
       </ul>
-      <p class="mt-8">
-        <a class="link inline-flex items-center gap-1 font-semibold" href={site.github}>
-          See all my projects on GitHub <Icon name="ArrowRight" class="size-4" />
-        </a>
-      </p>
+
+      <div data-reveal class="mt-14 flex justify-center">
+        <a href="/contact" class="btn btn-secondary">Let's talk about research</a>
+      </div>
     </div>
   </section>
 
-  <!-- ───────────── Closing invitation ───────────── -->
-  <section class="relative isolate overflow-hidden bg-primary-deep text-paper">
-    <div aria-hidden="true" class="dot-grid-light absolute inset-0 -z-10"></div>
-    <div aria-hidden="true" class="absolute -top-24 -right-24 -z-10 size-80 rounded-full bg-primary opacity-60 blur-3xl"></div>
-    <div data-reveal class="container-site grid gap-10 py-20 md:grid-cols-[1fr_auto] md:items-center lg:py-24">
-      <div>
-        <h2 class="max-w-[24ch] text-h2 font-semibold">
-          Need help with a dissertation, a dataset or a <span class="text-gold">model</span>?
-        </h2>
-        <p class="mt-4 max-w-[36rem] text-paper/75">
-          Send me a few lines about what you need and your deadline, and I'll come back to you with a quote.
+  <!-- ───────────── Writing support ───────────── -->
+  <section id="support" class="container-site pb-24 sm:pb-32" aria-labelledby="support-heading">
+    <div class="stage relative isolate overflow-hidden px-5 py-14 sm:px-12 sm:py-20">
+      <div aria-hidden="true" class="absolute -top-40 right-0 -z-10 size-[30rem] rounded-full bg-primary-soft blur-3xl"></div>
+
+      <div data-reveal class="mx-auto max-w-[44rem] text-center">
+        <p class="eyebrow">Research &amp; writing support</p>
+        <h2 id="support-heading" class="mt-3 text-h2 font-bold">Studying at a UK university? I can help.</h2>
+        <p class="mx-auto mt-5 max-w-[34rem] text-lead text-muted">
+          Guidance, editing and feedback for students new to UK academic conventions. The work you submit stays your own.
         </p>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="/contact" class="btn bg-paper text-ink hover:bg-gold">Request a quote</a>
-        <a href={site.whatsapp} class="btn border border-paper/40 text-paper hover:border-paper hover:bg-paper/10">
-          <Icon name="MessageCircle" class="size-4" /> WhatsApp
-        </a>
+
+      <div class="mx-auto mt-12 grid max-w-[60rem] gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center">
+        <div data-reveal><CitationCard /></div>
+        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {
+            services.map((s, i) => (
+              <li data-reveal style={`--d: ${i * 70}ms`} class="flex items-center gap-4 rounded-2xl bg-white p-3.5 pr-5 shadow-[0_1px_0_rgb(17_17_19/0.04)]">
+                <span class="icon-chip size-11 shrink-0"><Icon name={s.icon} /></span>
+                <span>
+                  <span class="block font-semibold">{s.title}</span>
+                  <span class="block text-sm text-muted">{s.text}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div data-reveal class="mt-12 flex flex-wrap justify-center gap-2.5">
+        <a href={site.quote} class="btn btn-primary">Request a quote</a>
+        <a href={site.whatsapp} class="btn btn-secondary"><Icon name="MessageCircle" class="size-4" /> WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── Closing ───────────── -->
+  <section class="container-site pb-24 text-center sm:pb-32">
+    <div data-reveal>
+      <h2 class="mx-auto max-w-[16ch] text-display font-bold">Let's work together.</h2>
+      <p class="mx-auto mt-5 max-w-[30rem] text-lead text-muted">Data science projects, research collaboration or academic support.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2.5">
+        <a href={site.hire} class="btn btn-primary">Hire me</a>
+        <a href={site.quote} class="btn btn-secondary">Request a quote</a>
       </div>
     </div>
   </section>
 </Base>
 
 <script>
-  // Count the numbers strip up from zero the first time it scrolls into view.
+  // Count numbers up from zero the first time they scroll into view.
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const counters = document.querySelectorAll<HTMLElement>('[data-count]');
   if (!reduce && 'IntersectionObserver' in window) {

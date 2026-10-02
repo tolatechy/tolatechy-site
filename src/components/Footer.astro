@@ -4,33 +4,37 @@ import { nav, site } from '../site';
 const items = nav.filter((item) => item.ready);
 ---
 
-<footer class="mt-auto border-t border-line bg-paper">
-  <div class="container-site grid gap-10 py-12 sm:grid-cols-[1.4fr_1fr_1fr]">
+<footer class="mt-auto bg-ink text-paper">
+  <div class="container-site grid gap-12 pt-16 pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
     <div>
-      <p class="font-semibold">{site.name}</p>
-      <p class="mt-1 text-muted">{site.role}<br />{site.location}</p>
+      <p class="text-2xl font-semibold tracking-tight">{site.name}</p>
+      <p class="mt-2 text-paper/60">{site.role} · {site.location}</p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href={site.hire} class="btn btn-sm bg-paper text-ink hover:bg-stage">Hire me</a>
+        <a href={site.quote} class="btn btn-sm border border-paper/25 text-paper hover:border-paper">Request a quote</a>
+      </div>
     </div>
 
     <div>
-      <p class="eyebrow">Contact</p>
-      <ul class="mt-3 space-y-2">
-        <li><a class="link break-all" href={`mailto:${site.email}`}>{site.email}</a></li>
-        <li><a class="link" href={site.whatsapp}>WhatsApp</a></li>
-        <li><a class="link" href={site.linkedin}>LinkedIn</a></li>
-        <li><a class="link" href={site.github}>GitHub</a></li>
+      <p class="text-sm text-paper/50">Contact</p>
+      <ul class="mt-4 space-y-2.5">
+        <li><a class="break-all text-paper/90 no-underline hover:text-paper hover:underline" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href={site.whatsapp}>WhatsApp</a></li>
+        <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href={site.linkedin}>LinkedIn</a></li>
+        <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href={site.github}>GitHub</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="eyebrow">Site</p>
-      <ul class="mt-3 space-y-2">
-        <li><a class="link" href="/">Home</a></li>
-        {items.map((item) => <li><a class="link" href={item.href}>{item.label}</a></li>)}
-        <li><a class="link" href={site.resumePdf}>Resume (PDF)</a></li>
+      <p class="text-sm text-paper/50">Site</p>
+      <ul class="mt-4 space-y-2.5">
+        <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href="/">Home</a></li>
+        {items.map((item) => <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href={item.href}>{item.label}</a></li>)}
+        <li><a class="text-paper/90 no-underline hover:text-paper hover:underline" href={site.resumePdf}>Resume (PDF)</a></li>
       </ul>
     </div>
   </div>
-  <div class="container-site pb-10 text-sm text-muted">
+  <div class="container-site border-t border-paper/10 py-6 text-sm text-paper/50">
     © {new Date().getFullYear()} {site.name}
   </div>
 </footer>

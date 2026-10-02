@@ -5,73 +5,97 @@ import Icon from '../components/Icon.astro';
 import { site } from '../site';
 
 const channels = [
-  { icon: 'Mail', label: 'Email', href: `mailto:${site.email}`, text: site.email, note: 'Best for quotes and anything with attachments' },
-  { icon: 'MessageCircle', label: 'WhatsApp', href: site.whatsapp, text: 'Message me on WhatsApp', note: 'Quick questions' },
-  { icon: 'Briefcase', label: 'LinkedIn', href: site.linkedin, text: 'View my LinkedIn profile', note: 'Professional enquiries' },
-  { icon: 'FolderGit2', label: 'GitHub', href: site.github, text: 'github.com/tolatechy', note: 'Code and projects' },
+  { icon: 'Mail', label: 'Email', href: `mailto:${site.email}`, text: site.email },
+  { icon: 'MessageCircle', label: 'WhatsApp', href: site.whatsapp, text: 'Send a message' },
+  { icon: 'Briefcase', label: 'LinkedIn', href: site.linkedin, text: 'View profile' },
+  { icon: 'FolderGit2', label: 'GitHub', href: site.github, text: 'github.com/tolatechy' },
 ] as const;
 
-const quoteChecklist = [
-  'Your university, course and level (undergraduate, Master’s or PhD)',
-  'The kind of help you need, e.g. referencing, editing, dissertation planning or data analysis',
-  'The referencing style your department uses',
-  'Your deadline',
-  'Roughly how long the work is, if it’s a document',
+const hireChecklist = [
+  'The role or project, and your organisation',
+  'The problem or data you’re working with',
+  'Timeline, and whether it’s remote or on-site',
 ];
+
+const quoteChecklist = [
+  'Your university, course and level',
+  'The help you need: referencing, editing, planning or analysis',
+  'Your department’s referencing style',
+  'Your deadline, and roughly how long the work is',
+];
+
+const mail = (subject: string) => `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
 ---
 
 <Base
-  title="Contact Ibraheem Obanla | Request a Quote"
-  description="Contact Ibraheem Obanla for a quote on dissertation, referencing, editing and data analysis support, research collaboration, or data science work."
+  title="Contact Ibraheem Obanla | Hire Me or Request a Quote"
+  description="Hire Ibraheem Obanla for data science work, or request a quote for dissertation, referencing, editing and data analysis support."
 >
   <PageHeader
     eyebrow="Contact"
-    title="Get in touch"
-    lead="For academic support, research collaboration or data science work. Email is best for quotes."
+    title="Let's talk."
+    lead="Hire me for data science work, or request a quote for academic support."
   />
 
-  <section class="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-14">
-    <ul class="grid gap-4 sm:grid-cols-2 lg:self-start">
+  <section class="container-site grid gap-5 lg:grid-cols-2">
+    <article id="hire" data-reveal class="scroll-mt-28 rounded-[var(--radius-stage)] bg-ink p-7 text-paper sm:p-10">
+      <span class="grid size-12 place-items-center rounded-2xl bg-paper/10"><Icon name="BrainCircuit" class="size-6" /></span>
+      <h2 class="mt-8 text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">Hire me</h2>
+      <p class="mt-2 text-paper/65">Data science, machine learning and analytics work.</p>
+      <ul class="mt-7 space-y-3">
+        {
+          hireChecklist.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-gold"><Icon name="CircleCheck" class="size-5" /></span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-9 flex flex-wrap gap-2">
+        <a href={mail('Data science work')} class="btn bg-paper text-ink hover:bg-stage">
+          <Icon name="Mail" class="size-4" /> Email me
+        </a>
+        <a href={site.resumePdf} class="btn border border-paper/25 text-paper hover:border-paper">Resume (PDF)</a>
+      </div>
+    </article>
+
+    <article id="quote" data-reveal style="--d: 120ms" class="stage scroll-mt-28 p-7 sm:p-10">
+      <span class="grid size-12 place-items-center rounded-2xl bg-white"><Icon name="GraduationCap" class="size-6" /></span>
+      <h2 class="mt-8 text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">Request a quote</h2>
+      <p class="mt-2 text-muted">Academic research and writing support.</p>
+      <ul class="mt-7 space-y-3">
+        {
+          quoteChecklist.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-primary"><Icon name="CircleCheck" class="size-5" /></span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-9 flex flex-wrap gap-2">
+        <a href={mail('Quote request')} class="btn btn-primary"><Icon name="Mail" class="size-4" /> Email a quote request</a>
+        <a href={site.whatsapp} class="btn btn-secondary"><Icon name="MessageCircle" class="size-4" /> WhatsApp</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="container-site pt-5 pb-24 sm:pb-32">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {
         channels.map((c, i) => (
-          <li data-reveal style={`--d: ${i * 80}ms`}>
-            <a href={c.href} class="panel panel-hover group flex h-full flex-col p-6 no-underline">
-              <span class="icon-chip transition-colors group-hover:bg-primary group-hover:text-paper">
-                <Icon name={c.icon} />
+          <li data-reveal style={`--d: ${i * 70}ms`}>
+            <a href={c.href} class="panel panel-hover group flex items-center gap-4 p-4 no-underline">
+              <span class="icon-chip shrink-0 transition-colors group-hover:bg-ink group-hover:text-paper"><Icon name={c.icon} /></span>
+              <span class="min-w-0">
+                <span class="block text-sm text-muted">{c.label}</span>
+                <span class="block truncate font-medium text-ink">{c.text}</span>
               </span>
-              <span class="mt-5 font-semibold text-ink">{c.label}</span>
-              <span class="mt-1 text-[0.9375rem] font-medium break-all text-primary">{c.text}</span>
-              <span class="mt-auto pt-3 text-sm text-muted">{c.note}</span>
             </a>
           </li>
         ))
       }
     </ul>
-
-    <aside
-      data-reveal
-      class="relative isolate self-start overflow-hidden rounded-[var(--radius-panel)] bg-primary-deep p-7 text-paper sm:p-9"
-    >
-      <div aria-hidden="true" class="dot-grid-light absolute inset-0 -z-10"></div>
-      <div aria-hidden="true" class="absolute -right-20 -bottom-20 -z-10 size-64 rounded-full bg-primary opacity-60 blur-3xl"></div>
-      <h2 class="text-h3 font-semibold">Requesting a quote for academic work</h2>
-      <p class="mt-2 text-paper/75">Including these details helps me give you an accurate quote quickly:</p>
-      <ul class="mt-6 space-y-3.5">
-        {
-          quoteChecklist.map((item) => (
-            <li class="flex gap-3">
-              <span class="mt-0.5 shrink-0 text-gold"><Icon name="CircleCheck" class="size-5" /></span>
-              <span>{item}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <a
-        class="btn mt-8 w-full bg-paper text-ink hover:bg-gold sm:w-auto"
-        href={`mailto:${site.email}?subject=${encodeURIComponent('Quote request')}`}
-      >
-        <Icon name="Mail" class="size-4" /> Email a quote request
-      </a>
-    </aside>
   </section>
 </Base>

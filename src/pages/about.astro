@@ -2,13 +2,14 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Icon from '../components/Icon.astro';
+import ToolLogo from '../components/ToolLogo.astro';
 import { site } from '../site';
 
 const facts = [
   { icon: 'MapPin', label: 'Based in', value: site.location },
-  { icon: 'GraduationCap', label: 'Trained in', value: 'Statistics, University of Ibadan' },
-  { icon: 'Languages', label: 'Researching', value: 'NLP for low-resource African languages' },
-  { icon: 'BookOpenCheck', label: 'Supporting', value: 'Students at UK universities' },
+  { icon: 'GraduationCap', label: 'Trained in', value: 'Statistics' },
+  { icon: 'Languages', label: 'Researching', value: 'African-language NLP' },
+  { icon: 'BookOpenCheck', label: 'Supporting', value: 'UK university students' },
 ] as const;
 
 const timeline = [
@@ -21,11 +22,13 @@ const timeline = [
 const skills = [
   { icon: 'Code', group: 'Languages', items: ['Python', 'R', 'SQL'] },
   { icon: 'BrainCircuit', group: 'Machine learning', items: ['scikit-learn', 'TensorFlow', 'Keras', 'PyTorch', 'XGBoost', 'SHAP'] },
-  { icon: 'Languages', group: 'Natural language processing', items: ['NLTK', 'spaCy', 'Transformer fine-tuning'] },
-  { icon: 'Sigma', group: 'Statistics', items: ['Hypothesis testing', 'A/B testing', 'Regression modelling', 'Statistical inference'] },
+  { icon: 'Languages', group: 'NLP', items: ['NLTK', 'spaCy', 'Transformer fine-tuning'] },
+  { icon: 'Sigma', group: 'Statistics', items: ['Hypothesis testing', 'A/B testing', 'Regression', 'Inference'] },
   { icon: 'ChartColumn', group: 'Data and reporting', items: ['pandas', 'NumPy', 'SciPy', 'Power BI', 'Tableau', 'Excel'] },
   { icon: 'Cloud', group: 'Deployment and cloud', items: ['Flask', 'Streamlit', 'FastAPI', 'AWS', 'Azure'] },
 ] as const;
+
+const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 'siPandas', 'siJupyter', 'siSpacy'] as const;
 ---
 
 <Base
@@ -34,106 +37,87 @@ const skills = [
 >
   <PageHeader
     eyebrow="About"
-    title="About me"
-    lead="I'm Ibraheem Obanla, a data scientist and research writer based in Lagos, Nigeria. My training is in statistics, and my work sits where data, research and writing meet."
-  >
-    <dl class="panel grid gap-px overflow-hidden bg-line sm:grid-cols-2">
-      {
-        facts.map((f) => (
-          <div class="bg-surface p-5">
-            <dt class="flex items-center gap-2 text-sm font-medium text-muted">
-              <span class="text-primary"><Icon name={f.icon} class="size-4" /></span>
-              {f.label}
-            </dt>
-            <dd class="mt-1.5 font-semibold">{f.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </PageHeader>
+    title="Hi, I'm Ibraheem."
+    lead="A data scientist and research writer in Lagos, trained in statistics. I work where data, research and writing meet."
+  />
 
-  <div class="container-site grid gap-14 py-16 sm:py-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-20">
-    <div data-reveal class="prose-site max-w-[40rem] text-muted">
-      <p class="text-lead text-ink">
-        I studied for a BSc in Statistics at the University of Ibadan, and I'm now completing an MSc in Data and
-        Information Science there.
+  <!-- Facts stage (the owner's photo will go here) -->
+  <section class="container-site">
+    <div class="stage relative isolate overflow-hidden p-5 sm:p-10">
+      <div aria-hidden="true" class="absolute -top-32 -left-20 -z-10 size-96 rounded-full bg-primary-soft blur-3xl"></div>
+      <div aria-hidden="true" class="absolute -right-20 -bottom-32 -z-10 size-96 rounded-full bg-[#fbefd5] blur-3xl"></div>
+      <dl class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          facts.map((f, i) => (
+            <div data-reveal style={`--d: ${i * 80}ms`} class="rounded-2xl bg-white p-5">
+              <dt class="flex items-center gap-2 text-sm text-muted">
+                <Icon name={f.icon} class="size-4" />
+                {f.label}
+              </dt>
+              <dd class="mt-2 text-xl font-semibold tracking-tight">{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <ul class="mt-8 flex flex-wrap justify-center gap-3" aria-label="Tools I use">
+        {logos.map((t) => <li><ToolLogo slug={t} class="size-11" /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="container-site grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-20">
+    <div data-reveal class="prose-site max-w-[40rem] text-lead text-muted">
+      <p>
+        <span class="font-medium text-ink">I studied statistics at the University of Ibadan,</span> and I'm now completing
+        an MSc in Data and Information Science there.
       </p>
       <p>
-        I worked as a data scientist for Armstrong Global Concepts, a company based in Austin, Texas, from 2021 to 2023,
-        and then as a machine learning engineer at TechSTEPS Limited in Lagos from 2023 to 2026. Across both roles I built
-        and deployed predictive models for customer retention and risk, automated reporting with Power BI and SQL, and put
-        data quality checks in place so the numbers on business dashboards could be relied on.
+        I worked as a data scientist for Armstrong Global Concepts in Austin, Texas, then as a machine learning engineer at
+        TechSTEPS in Lagos, building and deploying models for customer retention and risk, and the reporting around them.
       </p>
       <p>
-        My research is in natural language processing for low-resource African languages, with a focus on Yorùbá. I'm
-        interested both in the models and in the data underneath them: how existing language datasets are documented and
-        funded, and how classical machine learning compares with transformer models on real, messy social media text. I'm
-        also a co-author of a preprint on attention-based deep learning for early detection of Parkinson's disease.
+        My research is in NLP for low-resource African languages, with a focus on Yorùbá, and I co-authored a preprint on
+        deep learning for early Parkinson's disease detection.
       </p>
       <p>
-        Alongside this, I support students with their research and writing. Many are Nigerians who have moved to the UK
-        for postgraduate study and are meeting UK academic conventions for the first time. I help them understand what's
-        expected, from referencing and literature reviews to dissertation structure and statistical analysis, while the
-        work stays their own.
+        I also support students with their research and writing, especially Nigerians meeting UK academic conventions for
+        the first time. The work always stays their own.
       </p>
     </div>
 
-    <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
-      <section data-reveal class="panel p-6" aria-labelledby="resume-heading">
-        <h2 id="resume-heading" class="flex items-center gap-2 font-semibold">
-          <span class="icon-chip size-9"><Icon name="FileText" class="size-4" /></span>
-          My resume
-        </h2>
-        <div class="mt-5 grid gap-2">
-          <a class="btn btn-secondary justify-between" href={site.resumePdf}>
-            Download PDF <Icon name="Download" class="size-4" />
-          </a>
-          <a class="btn btn-secondary justify-between" href={site.resumeDocx}>
-            Download Word <Icon name="Download" class="size-4" />
-          </a>
+    <aside class="space-y-4 lg:sticky lg:top-28 lg:self-start">
+      <div data-reveal class="stage p-6">
+        <p class="font-semibold">My resume</p>
+        <div class="mt-4 grid gap-2">
+          <a class="btn btn-secondary justify-between" href={site.resumePdf}>PDF <Icon name="Download" class="size-4" /></a>
+          <a class="btn btn-secondary justify-between" href={site.resumeDocx}>Word <Icon name="Download" class="size-4" /></a>
         </div>
-      </section>
-
-      <section
-        data-reveal
-        class="relative isolate overflow-hidden rounded-[var(--radius-panel)] bg-primary-deep p-6 text-paper"
-        aria-labelledby="talk-heading"
-      >
-        <div aria-hidden="true" class="dot-grid-light absolute inset-0 -z-10"></div>
-        <h2 id="talk-heading" class="text-h3 font-semibold">Let's work together</h2>
-        <p class="mt-2 text-paper/75">For academic support, research collaboration or data science work.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/contact" class="btn bg-paper text-ink hover:bg-gold">Contact me</a>
-          <a href={site.whatsapp} class="btn border border-paper/40 text-paper hover:border-paper hover:bg-paper/10">
-            <Icon name="MessageCircle" class="size-4" /> WhatsApp
-          </a>
+      </div>
+      <div data-reveal class="rounded-[var(--radius-stage)] bg-ink p-6 text-paper">
+        <p class="text-xl font-semibold tracking-tight">Let's work together.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <a href={site.hire} class="btn btn-sm bg-paper text-ink hover:bg-stage">Hire me</a>
+          <a href={site.whatsapp} class="btn btn-sm border border-paper/25 text-paper hover:border-paper">WhatsApp</a>
         </div>
-      </section>
+      </div>
     </aside>
-  </div>
+  </section>
 
   <!-- Timeline -->
-  <section class="border-y border-line bg-surface py-16 sm:py-20" aria-labelledby="journey-heading">
+  <section class="border-t border-line py-20 sm:py-28" aria-labelledby="journey-heading">
     <div class="container-site">
-      <p class="eyebrow">Background</p>
-      <h2 id="journey-heading" class="mt-4 text-h2 font-semibold">Education and experience</h2>
-      <ol class="mt-12 grid gap-6 md:grid-cols-4 md:gap-0">
+      <h2 id="journey-heading" data-reveal class="text-center text-h2 font-bold">Education and experience.</h2>
+      <ol class="mt-14 grid gap-4 md:grid-cols-4">
         {
           timeline.map((t, i) => (
-            <li data-reveal style={`--d: ${i * 100}ms`} class="group/t relative pl-10 md:pt-12 md:pr-6 md:pl-0">
-              <span aria-hidden="true" class="absolute top-0 bottom-[-1.5rem] left-[0.95rem] w-px bg-line md:top-[1.2rem] md:right-0 md:bottom-auto md:left-0 md:h-px md:w-auto group-last/t:hidden" />
-              <span
-                aria-hidden="true"
-                class:list={[
-                  'absolute top-0 left-0 grid size-8 place-items-center rounded-full ring-4 ring-surface md:top-1',
-                  i === 0 ? 'bg-primary text-paper' : 'bg-primary-soft text-primary',
-                ]}
-              >
-                <Icon name={t.icon} class="size-4" />
+            <li data-reveal style={`--d: ${i * 100}ms`} class="stage p-6">
+              <span class:list={['grid size-11 place-items-center rounded-full', i === 0 ? 'bg-ink text-paper' : 'bg-white text-ink']}>
+                <Icon name={t.icon} class="size-5" />
               </span>
-              <p class="text-sm font-semibold text-primary tabular-nums">{t.when}</p>
+              <p class="mt-6 text-sm text-muted tabular-nums">{t.when}</p>
               <p class="mt-1 font-semibold">{t.title}</p>
-              <p class="mt-0.5 text-[0.9375rem] text-muted">{t.where}</p>
+              <p class="mt-1 text-sm text-muted">{t.where}</p>
             </li>
           ))
         }
@@ -142,21 +126,16 @@ const skills = [
   </section>
 
   <!-- Skills -->
-  <section class="container-site py-16 sm:py-20 lg:py-24" aria-labelledby="skills-heading">
-    <p class="eyebrow">Toolkit</p>
-    <h2 id="skills-heading" class="mt-4 text-h2 font-semibold">Skills and tools</h2>
-    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="container-site pb-24 sm:pb-32" aria-labelledby="skills-heading">
+    <h2 id="skills-heading" data-reveal class="text-center text-h2 font-bold">Skills and tools.</h2>
+    <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         skills.map((s, i) => (
-          <li data-reveal style={`--d: ${(i % 3) * 90}ms`} class="panel panel-hover group p-6">
-            <span class="icon-chip transition-colors group-hover:bg-primary group-hover:text-paper">
-              <Icon name={s.icon} />
-            </span>
+          <li data-reveal style={`--d: ${(i % 3) * 90}ms`} class="panel panel-hover p-6">
+            <span class="icon-chip"><Icon name={s.icon} /></span>
             <h3 class="mt-4 font-semibold">{s.group}</h3>
             <ul class="mt-3 flex flex-wrap gap-1.5">
-              {s.items.map((item) => (
-                <li class="rounded-full bg-sand px-2.5 py-0.5 text-sm">{item}</li>
-              ))}
+              {s.items.map((item) => <li class="rounded-full bg-stage px-2.5 py-0.5 text-sm">{item}</li>)}
             </ul>
           </li>
         ))

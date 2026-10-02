@@ -11,13 +11,15 @@ export const site = {
   github: 'https://github.com/tolatechy',
   resumePdf: '/resume/Ibraheem_Obanla_Resume.pdf',
   resumeDocx: '/resume/Ibraheem_Obanla_Resume.docx',
+  hire: '/contact#hire',
+  quote: '/contact#quote',
 };
 
 // Main navigation. Set `ready: true` when a page is built, and it appears in the menu.
 export const nav = [
-  { label: 'Research & Writing Support', href: '/research-support', ready: false },
-  { label: 'Research', href: '/research', ready: false },
   { label: 'Projects', href: '/projects', ready: false },
+  { label: 'Research', href: '/research', ready: false },
+  { label: 'Writing Support', href: '/research-support', ready: false },
   { label: 'Resume', href: '/resume', ready: false },
   { label: 'About', href: '/about', ready: true },
   { label: 'Contact', href: '/contact', ready: true },

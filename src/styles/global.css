@@ -1,58 +1,74 @@
 @import "tailwindcss";
 
 /*
-  Design tokens. Every colour has one job; don't add colours without a job for them.
-  Deliberately single (light) theme.
+  Roboto lacks a few Yorùbá letters (ṣ Ṣ ǹ Ǹ). This 3.5 KB file, cut from Noto Sans,
+  supplies only those; browsers use it automatically when one of them appears.
+*/
+@font-face {
+  font-family: "Yoruba Fill";
+  src: url("/fonts/yoruba-fill.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+1E62-1E63, U+01F8-01F9, U+1E3E-1E3F;
+}
 
-  paper / surface / sand   page background, raised panels, quiet section bands
-  ink / muted              text and secondary text
-  line                     hairline borders and dividers
-  primary                  actions and links (buttons, "Request a quote")
-  status-*                 research status labels: preprint, under review, in progress
+/*
+  Design tokens. Every colour has one job; don't add colours without a job for them.
+  Deliberately single (light) theme. Direction: crisp white, near-black, light grey "stages"
+  that hold visuals; colour comes from the content (charts, tool logos), not decoration.
+
+  paper / surface   page background (white)
+  stage             light grey panels that hold visuals and cards
+  ink / muted       text and secondary text
+  line              hairlines
+  primary           brand accent: icons, links, small highlights
+  status-*          research status labels
 */
 @theme {
-  --font-sans: "Onest Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Roboto Variable", "Yoruba Fill", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --color-paper: #f6f5f1;
+  --color-paper: #ffffff;
   --color-surface: #ffffff;
-  --color-sand: #ecebe4;
-  --color-ink: #15181c;
-  --color-muted: #555b62;
-  --color-line: #d9d7ce;
+  --color-stage: #f4f4f5;
+  --color-stage-deep: #ebebed;
+  --color-ink: #111113;
+  --color-muted: #6b6b73;
+  --color-line: #e6e6e9;
 
-  --color-primary: #0b5d52;
-  --color-primary-hover: #084a41;
-  --color-primary-soft: #dcebe7;
-  --color-primary-deep: #06332d;
-  /* Warm highlight: underlines, small emphasis marks. Never for text on paper (low contrast). */
-  --color-gold: #d9a441;
+  --color-primary: #0b6b5d;
+  --color-primary-soft: #e3f1ee;
+  --color-gold: #e0a43a;
 
-  --color-status-preprint: #0b5d52;
-  --color-status-preprint-bg: #dcebe7;
-  --color-status-review: #7a4f00;
-  --color-status-review-bg: #f5e7c8;
-  --color-status-progress: #8f3a1d;
-  --color-status-progress-bg: #f5ded3;
+  --color-status-preprint: #0b6b5d;
+  --color-status-preprint-bg: #e3f1ee;
+  --color-status-review: #8a5a00;
+  --color-status-review-bg: #fbefd5;
+  --color-status-progress: #a33d1c;
+  --color-status-progress-bg: #fbe6dc;
 
-  /* Type scale: fluid on the large sizes, fixed on reading sizes */
-  --text-display: clamp(2.5rem, 1.5rem + 4.2vw, 4.25rem);
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.03em;
-  --text-h2: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
-  --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: -0.02em;
+  /* Type scale: big, tight, bold headings; fluid on the large sizes */
+  --text-hero: clamp(2.75rem, 1.4rem + 5.6vw, 5.5rem);
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.045em;
+  --text-display: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.04em;
+  --text-h2: clamp(1.9rem, 1.3rem + 2.4vw, 3.25rem);
+  --text-h2--line-height: 1.06;
+  --text-h2--letter-spacing: -0.035em;
   --text-h3: 1.25rem;
-  --text-h3--line-height: 1.35;
-  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
-  --text-lead--line-height: 1.6;
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.65;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
   --text-eyebrow: 0.8125rem;
   --text-eyebrow--line-height: 1.4;
-  --text-eyebrow--letter-spacing: 0.08em;
 
-  --radius-control: 0.375rem;
-  --radius-panel: 0.625rem;
+  --radius-control: 999px;
+  --radius-panel: 1rem;
+  --radius-stage: 1.75rem;
 }
 
 @layer base {
@@ -61,7 +77,6 @@
     color: var(--color-ink);
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -69,14 +84,20 @@
     line-height: var(--text-body--line-height);
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
   ::selection {
     background: var(--color-primary-soft);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-ink);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   a {
@@ -99,7 +120,7 @@
   .container-site {
     margin-inline: auto;
     width: 100%;
-    max-width: 72rem;
+    max-width: 76rem;
     padding-inline: 1.25rem;
   }
   @media (min-width: 40rem) {
@@ -111,9 +132,7 @@
   .eyebrow {
     font-size: var(--text-eyebrow);
     line-height: var(--text-eyebrow--line-height);
-    letter-spacing: var(--text-eyebrow--letter-spacing);
-    text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-muted);
   }
 
@@ -121,52 +140,91 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    min-height: 2.875rem;
-    padding: 0.625rem 1.25rem;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.25rem;
     border-radius: var(--radius-control);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
     text-decoration: none;
-    transition: background-color 150ms, border-color 150ms, color 150ms;
+    white-space: nowrap;
+    transition: background-color 150ms, border-color 150ms, color 150ms, transform 150ms;
+  }
+  .btn:active {
+    transform: scale(0.97);
   }
   .btn-primary {
-    background: var(--color-primary);
-    color: var(--color-paper);
-  }
-  .btn-primary:hover {
-    background: var(--color-primary-hover);
-  }
-  .btn-secondary {
-    border: 1px solid var(--color-ink);
-    color: var(--color-ink);
-  }
-  .btn-secondary:hover {
     background: var(--color-ink);
     color: var(--color-paper);
   }
+  .btn-primary:hover {
+    background: #2b2b30;
+  }
+  .btn-secondary {
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-ink);
+  }
+  .btn-sm {
+    min-height: 2.25rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.9375rem;
+  }
 
   .link {
-    color: var(--color-primary);
+    color: var(--color-ink);
     text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
-    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-line);
+    text-decoration-thickness: 1.5px;
   }
   .link:hover {
-    text-decoration-color: var(--color-primary);
+    text-decoration-color: var(--color-ink);
   }
 
-  /* Raised panel used for service tiles, research items and project cards */
+  /* Large rounded grey area that holds visuals (as on mobbin.com) */
+  .stage {
+    background: var(--color-stage);
+    border-radius: var(--radius-stage);
+  }
+
+  /* White card, used inside stages or on white with a hairline */
   .panel {
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-panel);
-    transition: transform 250ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 250ms, border-color 250ms;
+    transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 300ms;
   }
   .panel-hover:hover {
-    transform: translateY(-3px);
-    border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-line));
-    box-shadow: 0 14px 30px -18px rgb(21 24 28 / 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -28px rgb(17 17 19 / 0.35);
+  }
+
+  /* Mock app window (notebook, document) */
+  .window {
+    background: var(--color-surface);
+    border-radius: 0.875rem;
+    box-shadow:
+      0 0 0 1px rgb(17 17 19 / 0.06),
+      0 30px 60px -30px rgb(17 17 19 / 0.35);
+    overflow: hidden;
+  }
+  .window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+  .window-bar > i {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: var(--color-stage-deep);
   }
 
   .icon-chip {
@@ -174,63 +232,37 @@
     place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    border-radius: 0.5rem;
-    background: var(--color-primary-soft);
-    color: var(--color-primary);
+    border-radius: 0.75rem;
+    background: var(--color-stage);
+    color: var(--color-ink);
   }
 
-  /* Graph-paper dot texture for hero and feature bands */
-  .dot-grid {
-    background-image: radial-gradient(circle, rgb(21 24 28 / 0.11) 1px, transparent 1.2px);
-    background-size: 22px 22px;
-  }
-  .dot-grid-light {
-    background-image: radial-gradient(circle, rgb(246 245 241 / 0.12) 1px, transparent 1.2px);
-    background-size: 22px 22px;
-  }
-
-  /* Project chart thumbnails: tinted to the site palette, full colour on hover */
-  .chart-thumb img {
-    filter: grayscale(1) contrast(1.05);
-    mix-blend-mode: multiply;
-    transition: filter 400ms, transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .chart-thumb {
-    background: var(--color-primary-soft);
-  }
-  .group:hover .chart-thumb img,
-  .group:focus-visible .chart-thumb img {
-    filter: none;
-    transform: scale(1.03);
-  }
-
-  /* Long-form text (About page etc.) */
   .prose-site > * + * {
     margin-top: 1.1em;
   }
   .prose-site a {
-    color: var(--color-primary);
+    color: var(--color-ink);
     text-decoration: underline;
   }
 }
 
 /*
-  Motion. Two kinds only:
-  1. .enter: the hero's one-time entrance, staggered with --d (delay).
-  2. [data-reveal]: key sections ease in once as they scroll into view.
-  Both are off for prefers-reduced-motion, and [data-reveal] only hides
-  content when JavaScript is running (html.js), so nothing is ever lost.
+  Motion:
+  1. .enter         one-time entrance, staggered with --d
+  2. [data-reveal]  key blocks ease in once on scroll (only when JS runs: html.js)
+  3. .float-*       gentle drift for floating logos
+  All off under prefers-reduced-motion.
 */
 @media (prefers-reduced-motion: no-preference) {
   .enter {
-    animation: enter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: enter 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: var(--d, 0ms);
   }
 
   html.js [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 700ms ease, transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transform: translateY(28px);
+    transition: opacity 800ms ease, transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
     transition-delay: var(--d, 0ms);
   }
   html.js [data-reveal].is-visible {
@@ -238,30 +270,25 @@
     transform: none;
   }
 
-  .draw-underline path {
-    stroke-dasharray: 420;
-    stroke-dashoffset: 420;
-    animation: draw 900ms 650ms cubic-bezier(0.6, 0, 0.2, 1) forwards;
+  .float-a {
+    animation: float 6s ease-in-out infinite;
   }
-
-  .float-slow {
-    animation: float 7s ease-in-out infinite;
+  .float-b {
+    animation: float 7.5s ease-in-out -2s infinite;
+  }
+  .float-c {
+    animation: float 9s ease-in-out -4s infinite;
   }
 }
 
 @keyframes enter {
   from {
     opacity: 0;
-    transform: translateY(18px);
-  }
-}
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
+    transform: translateY(22px);
   }
 }
 @keyframes float {
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
 }

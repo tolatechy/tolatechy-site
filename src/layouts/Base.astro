@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/onest';
+import '@fontsource-variable/roboto';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -27,7 +27,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="theme-color" content="#ffffff" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
@@ -73,7 +73,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
       }
 
       // Header gets a shadow once the page is scrolled.
-      const header = document.querySelector('[data-header]');
+      const header = document.querySelector('[data-bar]');
       const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });

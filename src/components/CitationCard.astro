@@ -1,0 +1,129 @@
+---
+// Live reference-style switcher: Ibraheem's own preprint, formatted correctly in four styles.
+// Auto-advances until the visitor picks a style, then stays put. Off under reduced motion.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const doi = 'https://doi.org/10.48550/arXiv.2602.07933';
+const styles = [
+  {
+    name: 'APA',
+    html: `Oseni, O. S., Obanla, I. O., &amp; Jimoh, T. A. (2026). <em>Attention-based deep learning for early Parkinson’s disease detection with tabular biomedical data</em> (arXiv:2602.07933). arXiv. ${doi}`,
+  },
+  {
+    name: 'Harvard',
+    html: `Oseni, O.S., Obanla, I.O. and Jimoh, T.A. (2026) ‘Attention-based deep learning for early Parkinson’s disease detection with tabular biomedical data’, <em>arXiv</em> [Preprint]. Available at: ${doi}.`,
+  },
+  {
+    name: 'MLA',
+    html: `Oseni, Olamide Samuel, et al. “Attention-Based Deep Learning for Early Parkinson’s Disease Detection with Tabular Biomedical Data.” <em>arXiv</em>, 2026, ${doi.replace('https://', '')}.`,
+  },
+  {
+    name: 'Chicago',
+    html: `Oseni, Olamide Samuel, Ibraheem Omotolani Obanla, and Toheeb Aduramomi Jimoh. 2026. “Attention-Based Deep Learning for Early Parkinson’s Disease Detection with Tabular Biomedical Data.” arXiv. ${doi}.`,
+  },
+];
+---
+
+<figure class:list={['window', className]} data-cite>
+  <figcaption class="window-bar">
+    <i></i><i></i><i></i>
+    <span class="ml-2">references.docx</span>
+  </figcaption>
+  <div class="p-5">
+    <div role="tablist" aria-label="Referencing style" class="flex flex-wrap gap-1.5">
+      {
+        styles.map((s, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`cite-tab-${i}`}
+            aria-controls={`cite-panel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class="cursor-pointer rounded-full bg-stage px-3 py-1 text-[0.8125rem] font-medium text-muted transition-colors hover:text-ink aria-selected:bg-ink aria-selected:text-paper"
+          >
+            {s.name}
+          </button>
+        ))
+      }
+    </div>
+    <div class="mt-4 grid">
+      {
+        styles.map((s, i) => (
+          <p
+            role="tabpanel"
+            id={`cite-panel-${i}`}
+            aria-labelledby={`cite-tab-${i}`}
+            data-active={i === 0 ? 'true' : 'false'}
+            aria-hidden={i === 0 ? undefined : 'true'}
+            class="cite-panel pl-[1.5em] -indent-[1.5em] text-[0.875rem] leading-relaxed [grid-area:1/1] [overflow-wrap:anywhere]"
+            set:html={s.html}
+          />
+        ))
+      }
+    </div>
+  </div>
+</figure>
+
+<style>
+  /* All styles share one grid cell, so the card is always as tall as the longest. */
+  .cite-panel[data-active='false'] {
+    visibility: hidden;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cite-panel[data-active='true'] {
+      animation: cite-in 450ms ease both;
+    }
+  }
+  @keyframes cite-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-cite]')) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    let current = 0;
+    let timer: number | undefined;
+    let interacted = false;
+
+    const select = (i: number, focus = false) => {
+      current = (i + tabs.length) % tabs.length;
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(j === current));
+        t.tabIndex = j === current ? 0 : -1;
+      });
+      panels.forEach((p, j) => {
+        p.dataset.active = String(j === current);
+        p.toggleAttribute('aria-hidden', j !== current);
+      });
+      if (focus) tabs[current].focus();
+    };
+    const stop = () => window.clearInterval(timer);
+    const pick = (i: number, focus = false) => ((interacted = true), stop(), select(i, focus));
+
+    tabs.forEach((t, i) => t.addEventListener('click', () => pick(i)));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') pick(current + 1, true);
+      if (e.key === 'ArrowLeft') pick(current - 1, true);
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const start = () => {
+        stop();
+        if (!interacted) timer = window.setInterval(() => select(current + 1), 3800);
+      };
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('mouseleave', start);
+      start();
+    }
+  }
+</script>

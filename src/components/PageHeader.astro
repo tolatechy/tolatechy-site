@@ -1,5 +1,5 @@
 ---
-// Banner at the top of inner pages: eyebrow, title, lead, and an optional right-hand slot.
+// Centred banner at the top of inner pages: eyebrow pill, big title, short lead.
 interface Props {
   eyebrow: string;
   title: string;
@@ -7,38 +7,11 @@ interface Props {
 }
 
 const { eyebrow, title, lead } = Astro.props;
-const hasAside = Astro.slots.has('default');
 ---
 
-<section class="relative isolate overflow-hidden border-b border-line">
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-b from-sand/80 to-paper"></div>
-  <div
-    aria-hidden="true"
-    class="dot-grid absolute inset-y-0 right-0 -z-10 w-2/3 [mask-image:linear-gradient(to_left,black,transparent)]"
-  >
-  </div>
-  <div aria-hidden="true" class="absolute -top-20 right-[10%] -z-10 size-72 rounded-full bg-primary-soft blur-3xl"></div>
-
-  <div
-    class:list={[
-      'container-site grid gap-12 py-16 sm:py-20 lg:py-24',
-      hasAside && 'lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-16',
-    ]}
-  >
-    <div>
-      <p class="enter eyebrow flex items-center gap-2">
-        <span class="inline-block size-2 rounded-full bg-primary"></span>
-        {eyebrow}
-      </p>
-      <h1 class="enter mt-4 text-display font-semibold" style="--d: 80ms">{title}</h1>
-      {lead && <p class="enter mt-7 max-w-[38rem] text-lead text-muted" style="--d: 160ms">{lead}</p>}
-    </div>
-    {
-      hasAside && (
-        <div class="enter" style="--d: 260ms">
-          <slot />
-        </div>
-      )
-    }
-  </div>
+<section class="container-site pt-14 pb-12 text-center sm:pt-20 sm:pb-16">
+  <p class="enter inline-flex items-center gap-2 rounded-full bg-stage px-3.5 py-1.5 text-sm text-muted">{eyebrow}</p>
+  <h1 class="enter mx-auto mt-6 max-w-[16ch] text-display font-bold" style="--d: 80ms">{title}</h1>
+  {lead && <p class="enter mx-auto mt-6 max-w-[36rem] text-lead text-muted" style="--d: 160ms">{lead}</p>}
+  <slot />
 </section>
