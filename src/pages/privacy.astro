@@ -1,0 +1,72 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../site';
+---
+
+<Legal
+  title={`Privacy Policy | ${site.name}`}
+  description="How Ibraheem Obanla collects, uses and protects personal information from enquiries, clients and visitors to this website."
+  heading="Privacy Policy"
+  updated="2 October 2026"
+>
+  <p>
+    This policy explains what personal information I collect, why, and what your rights are. I'm {site.name}, based in
+    {' '}{site.location}, and I'm responsible for your information. Contact:{' '}
+    <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+
+  <h2>What I collect</h2>
+  <ul>
+    <li><strong>Contact details</strong> you give me, such as your name, email address and phone or WhatsApp number.</li>
+    <li><strong>Your messages</strong> and the details of what you need, including your course, level and deadline.</li>
+    <li><strong>Documents</strong> you send me to work on.</li>
+    <li><strong>Payment records</strong>, such as transfer confirmations and receipts. I never ask for your card details.</li>
+    <li>
+      <strong>Basic technical data</strong> when you visit this website, such as your IP address, which my hosting
+      provider processes to deliver and protect the site.
+    </li>
+  </ul>
+  <p>This website does not use advertising or tracking cookies.</p>
+
+  <h2>Why I use it</h2>
+  <ul>
+    <li>To reply to your enquiry and give you a quote.</li>
+    <li>To provide the work you've asked for, which is necessary to carry out our agreement.</li>
+    <li>To keep payment records, as the law requires.</li>
+    <li>To keep this website secure and working.</li>
+  </ul>
+  <p>I don't sell your information, and I don't use it for marketing without your permission.</p>
+
+  <h2>Who processes it</h2>
+  <p>I use a small number of trusted services, which handle data on my behalf:</p>
+  <ul>
+    <li><strong>Cloudflare</strong>, which hosts this website and handles email delivery.</li>
+    <li><strong>Google (Gmail)</strong>, for email.</li>
+    <li><strong>WhatsApp (Meta)</strong>, if you choose to contact me there.</li>
+    <li><strong>Banks</strong>, to process transfers.</li>
+  </ul>
+  <p>
+    Some of these providers may store data outside Nigeria or the UK. They are required to protect it to recognised
+    standards.
+  </p>
+
+  <h2>How long I keep it</h2>
+  <ul>
+    <li>Documents you send for a project are deleted within 90 days of the work being completed, unless you ask me to keep them.</li>
+    <li>Messages and contact details are kept while we're working together and for up to two years afterwards, so I can help with follow-up questions.</li>
+    <li>Payment records are kept for as long as the law requires.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>
+    Under the Nigeria Data Protection Act 2023 and, where it applies, the UK GDPR, you can ask me to show you the
+    information I hold about you, correct it, delete it, or stop using it. Email me and I'll respond within one month.
+  </p>
+  <p>
+    If you're unhappy with how I've handled your information, you can complain to the Nigeria Data Protection Commission
+    or, in the UK, the Information Commissioner's Office (ICO). I'd appreciate the chance to sort it out with you first.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>If I change this policy, I'll update this page and the date at the top.</p>
+</Legal>

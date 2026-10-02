@@ -1,0 +1,53 @@
+---
+// Shared layout for the Terms and Privacy pages: readable long-form text.
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  updated: string;
+}
+const { title, description, heading, updated } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <section class="container-site pt-14 pb-24 sm:pt-20 sm:pb-32">
+    <div class="mx-auto max-w-[44rem]">
+      <p class="inline-flex rounded-full bg-stage px-3.5 py-1.5 text-sm text-muted">Last updated {updated}</p>
+      <h1 class="mt-6 text-display font-bold">{heading}</h1>
+      <div class="legal mt-10">
+        <slot />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal :global(h2) {
+    margin-top: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .legal :global(p),
+  .legal :global(ul) {
+    margin-top: 0.85rem;
+    color: color-mix(in srgb, var(--color-ink) 85%, transparent);
+  }
+  .legal :global(ul) {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .legal :global(li + li) {
+    margin-top: 0.4rem;
+  }
+  .legal :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .legal :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

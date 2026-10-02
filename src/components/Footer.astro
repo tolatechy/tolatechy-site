@@ -37,7 +37,11 @@ const items = nav.filter((item) => item.ready);
       </ul>
     </div>
   </div>
-  <div class="container-site border-t border-paper/10 py-6 text-sm text-paper/50">
-    © {new Date().getFullYear()} {site.name}
+  <div class="container-site flex flex-wrap items-center justify-between gap-3 border-t border-paper/10 py-6 text-sm text-paper/50">
+    <span>© {new Date().getFullYear()} {site.name}</span>
+    <span class="flex gap-5">
+      <a href="/terms" class="text-paper/60 no-underline hover:text-paper">Terms</a>
+      <a href="/privacy" class="text-paper/60 no-underline hover:text-paper">Privacy</a>
+    </span>
   </div>
 </footer>

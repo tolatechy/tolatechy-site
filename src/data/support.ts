@@ -35,6 +35,10 @@ export const faqs = [
     a: 'It depends on the length of the work, your deadline and the kind of help you need. Send me those details and I will give you a quote.',
   },
   {
+    q: 'How do payment and refunds work?',
+    a: 'I take a deposit of 50% to 70% before starting, and the balance is due within 48 hours of the work being completed to your satisfaction. I accept bank transfers in GBP, EUR, USD and NGN. Refund windows and other details are in my Terms of Service.',
+  },
+  {
     q: 'Which countries do you work with?',
     a: 'Students at universities in the UK, the US, Canada and elsewhere. I work remotely, so your location is not a barrier.',
   },

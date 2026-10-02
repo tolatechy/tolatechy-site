@@ -1,0 +1,100 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../site';
+import { referencingStyles } from '../data/support';
+---
+
+<Legal
+  title={`Terms of Service | ${site.name}`}
+  description="Terms for research and writing support services: quotes, payment, revisions, cancellations and refunds, confidentiality and liability."
+  heading="Terms of Service"
+  updated="2 October 2026"
+>
+  <p>
+    These terms apply when you engage me for research and writing support. Please read them before you pay a deposit.
+    By paying a deposit, you agree to them. Data science and consulting work is agreed separately for each project.
+  </p>
+
+  <h2>1. Who I am</h2>
+  <p>
+    I'm {site.name}, a data scientist and research analyst based in {site.location}. You can reach me at{' '}
+    <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+
+  <h2>2. The services</h2>
+  <p>
+    I provide research and writing support: referencing and citation ({referencingStyles.join(', ')} and other styles),
+    editing and proofreading, dissertation and thesis planning, literature review guidance, and statistics and data
+    analysis support. The exact scope of each piece of work is set out in your quote.
+  </p>
+
+  <h2>3. Quotes</h2>
+  <p>
+    I give a quote based on the length of the work, the deadline and the kind of help you need. A quote covers the scope
+    and deadline it was given for. If either changes, the price may change, and I will confirm any new price with you
+    before continuing.
+  </p>
+
+  <h2>4. Payment</h2>
+  <ul>
+    <li><strong>Deposit:</strong> between 50% and 70% of the quoted price, paid before work starts. The exact amount is stated in your quote.</li>
+    <li><strong>Balance:</strong> the remaining amount is due within 48 hours of the work being completed to your satisfaction.</li>
+    <li><strong>Method:</strong> bank transfer only. I accept GBP, EUR, USD and NGN.</li>
+    <li><strong>Proof of payment:</strong> please send a receipt or transfer confirmation for each payment. Work starts once the deposit is confirmed.</li>
+  </ul>
+
+  <h2>5. Revisions</h2>
+  <p>
+    I offer revisions until you are satisfied with the work, within the scope agreed in your quote. New requirements or
+    extra material beyond that scope may be quoted separately.
+  </p>
+
+  <h2>6. Cancellations and refunds</h2>
+  <p>If you change your mind after paying, you can cancel and receive a refund of what you have paid, as long as you ask within these windows:</p>
+  <ul>
+    <li><strong>Deadline two weeks or more away:</strong> within 24 hours of the project starting.</li>
+    <li><strong>Deadline less than two weeks away:</strong> within 6 hours of the project starting.</li>
+  </ul>
+  <p>
+    A project starts when I confirm receipt of your deposit. Requests made after these windows are not eligible for a
+    refund. Refunds are paid by bank transfer, in the currency you paid in.
+  </p>
+
+  <h2>7. Your responsibilities</h2>
+  <ul>
+    <li>Give me accurate information about your course, requirements, referencing style and deadline.</li>
+    <li>Send the materials I need in good time. Delays in receiving them may move the delivery date.</li>
+    <li>You are responsible for making sure that your use of my services complies with the rules and policies of your university or institution.</li>
+  </ul>
+
+  <h2>8. Deadlines</h2>
+  <p>
+    I agree a delivery date with you and work to meet it. If something outside my control causes a delay, I will tell
+    you as soon as possible.
+  </p>
+
+  <h2>9. Confidentiality</h2>
+  <p>
+    I keep your documents, details and our conversations confidential. I don't share them with anyone except where
+    needed to provide the service or where the law requires it. Your documents remain yours. See my{' '}
+    <a href="/privacy">Privacy Policy</a> for how I handle personal information.
+  </p>
+
+  <h2>10. Results and liability</h2>
+  <p>
+    I can't guarantee any particular grade, mark or outcome, because these depend on factors outside my control. To the
+    extent the law allows, my total liability for any piece of work is limited to the amount you paid for it.
+  </p>
+
+  <h2>11. Changes to these terms</h2>
+  <p>
+    I may update these terms from time to time. The version that applies to your work is the one on this page when you
+    paid your deposit.
+  </p>
+
+  <h2>12. Governing law</h2>
+  <p>These terms are governed by the laws of the Federal Republic of Nigeria.</p>
+
+  <h2>Questions</h2>
+  <p>Email me at <a href={`mailto:${site.email}`}>{site.email}</a> or message me on <a href={site.whatsapp}>WhatsApp</a>.</p>
+</Legal>
