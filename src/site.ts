@@ -7,7 +7,7 @@ export const site = {
   handle: 'tolatechy',
   role: 'Data Scientist & Research Analyst',
   location: 'Lagos, Nigeria',
-  email: 'ibraheemobanla44@gmail.com',
+  email: 'info@ibraheemobanla.com',
   whatsapp: 'https://wa.me/2349020660127',
   linkedin: 'https://www.linkedin.com/in/ibraheemobanla',
   github: 'https://github.com/tolatechy',
