@@ -1,0 +1,10 @@
+// Cloudflare Worker settings. The site is plain static files from `dist/`.
+// `not_found_handling` makes unknown addresses show our 404 page instead of a blank error.
+{
+  "name": "tolatechy",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

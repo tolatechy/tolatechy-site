@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../site';
+
+const links = [
+  { href: '/projects', label: 'Projects', icon: 'FolderGit2' },
+  { href: '/research', label: 'Research', icon: 'FlaskConical' },
+  { href: '/research-support', label: 'Writing support', icon: 'PenLine' },
+  { href: '/contact', label: 'Contact', icon: 'Mail' },
+] as const;
+---
+
+<Base title={`Page not found | ${site.name}`} description="This page doesn't exist." noindex>
+  <section class="container-site py-20 text-center sm:py-28">
+    <p class="enter font-mono text-sm text-muted">404</p>
+    <h1 class="enter mx-auto mt-4 max-w-[14ch] text-display font-bold" style="--d: 80ms">This page doesn't exist.</h1>
+    <p class="enter mx-auto mt-5 max-w-[30rem] text-lead text-muted" style="--d: 160ms">
+      The link might be old, or there's a typo in the address. One of these should get you back on track.
+    </p>
+    <ul class="enter mx-auto mt-10 grid max-w-[40rem] gap-3 sm:grid-cols-2" style="--d: 240ms">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} class="panel panel-hover group flex items-center gap-4 p-4 text-left no-underline">
+              <span class="icon-chip shrink-0 transition-colors group-hover:bg-ink group-hover:text-paper"><Icon name={l.icon} /></span>
+              <span class="font-medium text-ink">{l.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/" class="btn btn-primary enter mt-10" style="--d: 320ms">Back to the home page</a>
+  </section>
+</Base>

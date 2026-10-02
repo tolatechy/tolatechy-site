@@ -237,6 +237,12 @@
     color: var(--color-ink);
   }
 
+  /* Below-the-fold sections: the browser skips laying them out until they're near the screen. */
+  .defer-render {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
   .prose-site > * + * {
     margin-top: 1.1em;
   }
