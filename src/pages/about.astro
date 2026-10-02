@@ -14,7 +14,7 @@ const facts = [
 ] as const;
 
 const timeline = [
-  { when: 'Now', title: 'MSc, Data and Information Science', where: 'University of Ibadan · in progress', icon: 'GraduationCap' },
+  { when: '2026', title: 'MSc, Data and Information Science', where: 'University of Ibadan', icon: 'GraduationCap' },
   { when: '2023 – 2026', title: 'Machine Learning Engineer', where: 'TechSTEPS Limited, Lagos', icon: 'Briefcase' },
   { when: '2021 – 2023', title: 'Data Scientist', where: 'Armstrong Global Concepts LLC, Austin, Texas', icon: 'Briefcase' },
   { when: '2021', title: 'BSc, Statistics', where: 'University of Ibadan', icon: 'GraduationCap' },
@@ -64,10 +64,12 @@ const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 
       />
       <div class="float-a absolute -left-3 bottom-10 flex items-center gap-2.5 rounded-full bg-white py-1.5 pr-4 pl-1.5 shadow-[0_14px_30px_-14px_rgb(17_17_19/0.45)] sm:-left-8">
         <span class="grid size-8 place-items-center rounded-full bg-stage"><Icon name="GraduationCap" class="size-4" /></span>
-        <span class="text-[0.8125rem] leading-tight"><span class="block font-medium">BSc Statistics</span><span class="text-muted">University of Ibadan</span></span>
+        <span class="text-[0.8125rem] leading-tight"><span class="block font-medium">MSc Data and Information Science</span><span class="text-muted">University of Ibadan</span></span>
       </div>
       <div class="float-c absolute -right-3 top-10 sm:-right-8">
-        <ToolLogo slug="siPython" class="size-12" />
+        <span class="grid size-12 place-items-center rounded-2xl bg-white text-ink shadow-[0_12px_30px_-14px_rgb(17_17_19/0.4)]" title="University of Ibadan">
+          <Icon name="Landmark" class="size-6" strokeWidth={1.6} />
+        </span>
       </div>
     </div>
   </section>
@@ -98,8 +100,8 @@ const logos = ['siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 
   <section class="container-site grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-20">
     <div data-reveal class="prose-site max-w-[40rem] text-lead text-muted">
       <p>
-        <span class="font-medium text-ink">I studied statistics at the University of Ibadan,</span> and I'm now completing
-        an MSc in Data and Information Science there.
+        <span class="font-medium text-ink">I studied statistics at the University of Ibadan,</span> followed by an MSc in
+        Data and Information Science there.
       </p>
       <p>
         I worked as a data scientist for Armstrong Global Concepts in Austin, Texas, then as a machine learning engineer at
