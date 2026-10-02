@@ -2,9 +2,9 @@
 title: "Statistics and data analysis"
 seoTitle: "Dissertation Statistics & Data Analysis Help in R and Python"
 description: "Statistics help for dissertations and theses: choosing the right test, checking assumptions, running analysis in R or Python, and interpreting and reporting results correctly."
-short: "Choosing suitable methods, running the analysis in R or Python, and understanding how to report the results correctly."
+short: "Picking the right test, running it in R or Python, and making sense of what the output is telling you."
 icon: "ChartColumn"
-audience: "Students with quantitative data and a methods chapter to write, from a statistician with a BSc in Statistics and an MSc in Data and Information Science."
+audience: "You've got quantitative data and a methods or results chapter to write, and you'd like someone with a statistics background to check your thinking."
 includes:
   - "Choosing statistical tests and models that answer your research questions"
   - "Preparing and cleaning data, and checking assumptions"

@@ -1,6 +1,6 @@
 ---
 title: Attention-Based Deep Learning for Early Parkinson's Disease Detection with Tabular Biomedical Data
-highlight: Comparing attention-based deep learning models with established methods for detecting Parkinson's disease early from biomedical voice measurements.
+highlight: "We tested whether attention-based deep learning models pick up early signs of Parkinson's disease from voice measurements better than standard methods."
 status: preprint
 area: Machine learning in health
 year: 2026

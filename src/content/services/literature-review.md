@@ -2,9 +2,9 @@
 title: "Literature review guidance"
 seoTitle: "Literature Review Help for Dissertations: Finding, Organising & Critiquing Sources"
 description: "Guidance on writing a literature review for a UK dissertation: searching for sources, organising them by theme, critical analysis rather than description, and identifying the gap your research fills."
-short: "Finding, organising and critically discussing sources, rather than summarising them one after another."
+short: "Turning a pile of sources into an actual argument, instead of a summary of one paper after another."
 icon: "Library"
-audience: "Students told their literature review is 'too descriptive', or who aren't sure what a UK marker expects a literature review to do."
+audience: "You've been told your literature review is 'too descriptive', or you're not sure what a UK marker actually wants from one."
 includes:
   - "Search strategies for Google Scholar and academic databases"
   - "Organising sources by theme, method or debate rather than one by one"

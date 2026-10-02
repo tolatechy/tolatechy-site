@@ -6,44 +6,44 @@ export const process = [
   {
     icon: 'Send',
     title: 'Send your details',
-    text: 'Your course, level, referencing style, deadline and what you need help with, by email or WhatsApp.',
+    text: 'Tell me your course, level, referencing style and deadline, and what you’re stuck on. Email or WhatsApp is fine.',
   },
   {
     icon: 'Receipt',
     title: 'Get a quote',
-    text: 'Based on the length of the work, the deadline and the kind of help you need.',
+    text: 'I look at how long the work is and how soon you need it, then send you a price.',
   },
   {
     icon: 'MessagesSquare',
     title: 'Work through it together',
-    text: 'Edits, comments and guidance you can see, understand and act on.',
+    text: 'You see every edit and comment, and you can ask me about any of them.',
   },
   {
     icon: 'CircleCheck',
     title: 'Submit with confidence',
-    text: 'Work that meets the conventions your markers expect.',
+    text: 'Hand it in knowing it’s done the way your markers expect.',
   },
 ] as const;
 
 export const faqs = [
   {
     q: 'Which referencing styles do you work with?',
-    a: `${referencingStyles.join(', ')}, and others on request. Tell me which one your department uses, or send me your module handbook.`,
+    a: `${referencingStyles.join(', ')}, and others if you need them. Tell me which one your department uses, or just send me your module handbook.`,
   },
   {
     q: 'How much does it cost?',
-    a: 'It depends on the length of the work, your deadline and the kind of help you need. Send me those details and I will give you a quote.',
+    a: 'It depends on how long the work is, when it’s due and what kind of help you need. Send me those details and I’ll come back to you with a quote.',
   },
   {
     q: "I'm a Nigerian student new to the UK. Is this for me?",
-    a: 'Yes. Many of the students I work with studied in Nigeria and are meeting UK academic conventions for the first time, from referencing to how a dissertation is structured.',
+    a: 'Yes. A lot of the students I work with did their first degree in Nigeria and are still getting used to how things are done in the UK, especially referencing and how a dissertation is put together.',
   },
   {
     q: 'Which levels do you support?',
-    a: "Undergraduate, Master's and PhD students.",
+    a: "Undergraduates, Master's students and PhD candidates.",
   },
   {
     q: 'How do I send my work?',
-    a: 'By email, ideally as a Word document. WhatsApp is fine for quick questions.',
+    a: 'Email is best, ideally with a Word document attached. WhatsApp works for quick questions.',
   },
 ];
