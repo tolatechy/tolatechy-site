@@ -1,5 +1,5 @@
 ---
-title: "Explainable network intrusion detection"
+title: "Explainable Network Intrusion Detection"
 repo: https://github.com/tolatechy/Intrusion-Detection-Explainable
 area: "Security"
 summary: "Intrusion classification with SHAP attributions, deployed as a Streamlit app so analysts can see why traffic was flagged."

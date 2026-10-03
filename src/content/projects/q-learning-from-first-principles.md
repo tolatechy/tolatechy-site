@@ -1,5 +1,5 @@
 ---
-title: "Gridworld Q-learning"
+title: "Q-Learning from First Principles"
 repo: https://github.com/tolatechy/Gridworld-QLearning
 area: "Reinforcement learning"
 summary: "Tabular Q-learning implemented from the Bellman equation, without an RL framework."

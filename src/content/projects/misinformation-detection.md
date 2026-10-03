@@ -1,5 +1,5 @@
 ---
-title: "Misinformation detector"
+title: "Misinformation Detection"
 repo: https://github.com/tolatechy/Misinformation-Detector
 area: "NLP & text"
 summary: "A Flask app that classifies news text as reliable or misinformation."

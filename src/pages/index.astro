@@ -4,7 +4,6 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import StatusBadge from '../components/StatusBadge.astro';
 import HeroVisual from '../components/HeroVisual.astro';
-import CitationCard from '../components/CitationCard.astro';
 import ToolLogo from '../components/ToolLogo.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../site';
@@ -15,7 +14,7 @@ const research = (await getCollection('research')).sort((a, b) => a.data.order -
 const featuredProjects = (await getCollection('projects'))
   .filter((p) => p.data.featured && p.data.image)
   .sort((a, b) => a.data.order - b.data.order)
-  .map((p) => ({ ...p.data, image: p.data.image!, imageAlt: `Chart from the ${p.data.title} notebook` }));
+  .map((p) => ({ ...p.data, id: p.id, image: p.data.image!, imageAlt: `Chart from the ${p.data.title} notebook` }));
 
 const tools = [
   'siPython', 'siR', 'siTensorflow', 'siPytorch', 'siScikitlearn', 'siPandas', 'siNumpy',
@@ -76,8 +75,7 @@ const jsonLd = { '@context': 'https://schema.org', ...person(Astro.site?.href) }
           <span class="absolute inline-flex size-full animate-ping rounded-full bg-[#5fe0c4] opacity-60 motion-reduce:hidden"></span>
           <span class="relative inline-flex size-2 rounded-full bg-[#5fe0c4]"></span>
         </span>
-        <span class="sm:hidden">Available for remote work worldwide</span>
-        <span class="hidden sm:inline">Available for remote data science work · Worldwide</span>
+        Available for remote work worldwide
       </p>
       <h1 class="enter mx-auto mt-6 max-w-[16ch] text-hero font-bold" style="--d: 80ms">
         Data Scientist and Research Analyst.
@@ -163,7 +161,7 @@ const jsonLd = { '@context': 'https://schema.org', ...person(Astro.site?.href) }
                 <div class="window translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
                   <div class="window-bar">
                     <i></i><i></i><i></i>
-                    <span class="ml-2 truncate">{p.repo.split('/').pop()}.ipynb</span>
+                    <span class="ml-2 truncate">{p.id.replaceAll('-', '_')}.ipynb</span>
                   </div>
                   <div class="aspect-[16/10] overflow-hidden bg-white p-3">
                     <Image
@@ -259,22 +257,17 @@ const jsonLd = { '@context': 'https://schema.org', ...person(Astro.site?.href) }
         </p>
       </div>
 
-      <div class="mx-auto mt-12 grid max-w-[60rem] gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center">
-        <div data-reveal><CitationCard /></div>
-        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-          {
-            services.map((s, i) => (
-              <li data-reveal style={`--d: ${i * 70}ms`} class="flex items-center gap-4 rounded-2xl bg-white p-3.5 pr-5 shadow-[0_1px_0_rgb(17_17_19/0.04)]">
-                <span class="icon-chip size-11 shrink-0"><Icon name={s.icon} /></span>
-                <span>
-                  <span class="block font-semibold">{s.title}</span>
-                  <span class="block text-sm text-muted">{s.text}</span>
-                </span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <ul class="mx-auto mt-12 grid max-w-[60rem] gap-3 sm:grid-cols-2 lg:grid-cols-6">
+        {
+          services.map((s, i) => (
+            <li data-reveal style={`--d: ${i * 70}ms`} class:list={['rounded-2xl bg-white p-6', i < 2 ? 'lg:col-span-3' : 'lg:col-span-2']}>
+              <span class="icon-chip"><Icon name={s.icon} /></span>
+              <span class="mt-5 block font-semibold">{s.title}</span>
+              <span class="mt-1 block text-sm text-muted">{s.text}</span>
+            </li>
+          ))
+        }
+      </ul>
 
       <div data-reveal class="mt-12 flex flex-wrap justify-center gap-2.5">
         <a href={site.quote} class="btn btn-primary">Request a quote</a>

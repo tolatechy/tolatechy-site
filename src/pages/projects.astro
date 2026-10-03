@@ -59,7 +59,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     <h2 id="featured-heading" class="sr-only">Featured projects</h2>
     <ul class="grid gap-x-5 gap-y-12 md:grid-cols-2">
       {
-        featured.map(({ data }, i) => (
+        featured.map(({ id, data }, i) => (
           <li data-reveal data-area={slug(data.area)} style={`--d: ${(i % 2) * 120}ms`}>
             <a href={data.repo} class="group block no-underline">
               <div class="stage relative overflow-hidden p-5 pb-0 sm:p-8 sm:pb-0">
@@ -67,7 +67,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                 <div class="window translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
                   <div class="window-bar">
                     <i></i><i></i><i></i>
-                    <span class="ml-2 truncate">{data.repo.split('/').pop()}.ipynb</span>
+                    <span class="ml-2 truncate">{id.replaceAll('-', '_')}.ipynb</span>
                   </div>
                   <div class="aspect-[16/10] overflow-hidden bg-white p-3">
                     <Image src={data.image!} alt={`Chart from the ${data.title} notebook`} widths={[480, 720, 960]} sizes="(min-width: 768px) 560px, 100vw" class="h-full w-full object-contain object-top" />

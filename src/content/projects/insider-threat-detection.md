@@ -1,5 +1,5 @@
 ---
-title: "Insider threat detection in email"
+title: "Insider Threat Detection in Email"
 repo: https://github.com/tolatechy/Insider-Threat-Email-Detection
 area: "Security"
 summary: "Text classification to surface threatening messages, using a voting ensemble of logistic regression, decision tree and random forest, benchmarked against a Keras neural network."

@@ -1,5 +1,5 @@
 ---
-title: "Employee attrition prediction"
+title: "Employee Attrition Prediction"
 repo: https://github.com/tolatechy/Employee-Attrition-Prediction
 area: "Customer & people analytics"
 summary: "Attrition modelling on 1,470 employee records and 35 features, comparing logistic regression, decision trees, random forests and gradient boosting."

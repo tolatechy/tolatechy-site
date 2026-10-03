@@ -1,5 +1,5 @@
 ---
-title: "Concrete strength prediction"
+title: "Concrete Strength Prediction"
 repo: https://github.com/tolatechy/Concrete-Strength-Prediction
 area: "Regression & forecasting"
 summary: "Regression modelling to predict concrete strength."
